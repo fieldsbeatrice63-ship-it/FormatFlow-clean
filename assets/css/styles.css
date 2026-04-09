@@ -1,132 +1,214 @@
-/* ===== APP LAYOUT UPGRADE ===== */
+* {
+  box-sizing: border-box;
+}
 
-.app-shell {
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f6f1;
+  color: #1f2a25;
+}
+
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #314d42;
+  color: #fff;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.cta-link {
+  padding: 10px 16px;
+  background: #c5a85a;
+  color: #1f2a25 !important;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.hero {
+  padding: 64px 24px;
+  background: linear-gradient(180deg, #e9efe8 0%, #f6f6f1 100%);
+}
+
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: #314d42;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #c5a85a;
+  color: #1f2a25;
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 24px;
+}
+
+.section h2 {
+  font-size: 34px;
+  margin-bottom: 24px;
+}
+
+.card-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.highlight {
+  text-align: center;
+}
+
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
   padding: 24px;
 }
 
-.workspace-panel {
-  background: #ffffff;
+.input-panel,
+.preview-panel {
+  background: #fff;
   border-radius: 18px;
   padding: 24px;
 }
 
-.panel-block {
-  margin-bottom: 20px;
-}
-
-.panel-block h1 {
-  margin-bottom: 10px;
-}
-
-.panel-intro {
-  color: #5a6a62;
-  font-size: 14px;
-}
-
-.helper-text {
-  font-size: 12px;
-  color: #7a8781;
-  margin-top: 6px;
-}
-
 textarea,
-select,
-input[type="file"] {
+select {
   width: 100%;
-  margin-top: 8px;
   padding: 12px;
-  border-radius: 10px;
+  margin-top: 8px;
   border: 1px solid #d7ddd8;
+  border-radius: 10px;
 }
 
 textarea {
-  min-height: 180px;
+  min-height: 220px;
 }
 
-.tool-grid {
+.templates,
+.actions,
+.export {
+  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
 }
 
-.tool-grid button {
+.templates button,
+.actions button,
+.export button {
   padding: 10px 14px;
+  margin: 0;
   background: #314d42;
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
 }
 
-.viewer-panel {
-  display: flex;
-  flex-direction: column;
-}
-
-.viewer-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.mode-pill {
-  margin-left: 10px;
-  font-size: 12px;
-  background: #c5a85a;
-  padding: 4px 8px;
-  border-radius: 8px;
-}
-
-.viewer-controls {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.viewer-controls button {
-  padding: 6px 10px;
-  border: none;
-  background: #314d42;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.viewer-frame {
-  background: #e9efe8;
-  border-radius: 12px;
-  padding: 12px;
-  height: 600px;
-  overflow: hidden;
-}
-
-.preview-viewport {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+.page {
   background: white;
-  border-radius: 8px;
-}
-
-.document-page {
-  min-height: 100%;
-  padding: 20px;
+  min-height: 600px;
   position: relative;
+  padding: 20px;
+  border: 1px solid #d7ddd8;
+  border-radius: 12px;
 }
 
-.viewer-note {
-  font-size: 12px;
-  margin-top: 10px;
-  color: #6c7a73;
+.preview-content {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0.2;
+  font-weight: 700;
+}
+
+.template1 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.template2 {
+  font-family: Georgia, serif;
+}
+
+.template3 {
+  font-family: "Trebuchet MS", sans-serif;
 }
 
 @media (max-width: 900px) {
-  .app-shell {
+  .card-grid,
+  .app-container {
     grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 34px;
   }
 }
