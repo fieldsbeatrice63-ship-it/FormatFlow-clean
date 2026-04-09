@@ -5,10 +5,68 @@ let totalPages = 1;
 
 function selectTemplate(template) {
   currentTemplate = template;
-  updatePreview();
 }
 
-function updatePreview() {
+function setAssistantMessage(message) {
+  const assistantBox = document.getElementById("assistantBox");
+  if (assistantBox) {
+    assistantBox.textContent = message;
+  }
+}
+
+function getMissingInfo(docType, text) {
+  const lowerText = text.toLowerCase();
+
+  if (!docType) {
+    return ["Please select a document type before generating your document."];
+  }
+
+  if (text.trim().length < 20) {
+    return ["More information is needed before FormatFlow can generate a professional document."];
+  }
+
+  const missing = [];
+
+  if (docType === "resume") {
+    if (!lowerText.includes("name")) missing.push("full name");
+    if (!lowerText.includes("experience")) missing.push("work experience");
+    if (!lowerText.includes("skill")) missing.push("skills");
+    if (!lowerText.includes("education")) missing.push("education");
+  }
+
+  if (docType === "cover-letter") {
+    if (!lowerText.includes("position")) missing.push("position or role");
+    if (!lowerText.includes("company")) missing.push("company name");
+    if (!lowerText.includes("experience")) missing.push("relevant experience");
+  }
+
+  if (docType === "resignation-letter") {
+    if (!lowerText.includes("position")) missing.push("current position");
+    if (!lowerText.includes("date")) missing.push("effective date");
+  }
+
+  if (docType === "legal") {
+    if (!lowerText.includes("date")) missing.push("relevant date");
+    if (!lowerText.includes("party")) missing.push("parties involved");
+    if (!lowerText.includes("term")) missing.push("terms or purpose");
+  }
+
+  if (docType === "business") {
+    if (!lowerText.includes("company")) missing.push("company name");
+    if (!lowerText.includes("purpose")) missing.push("document purpose");
+    if (!lowerText.includes("audience")) missing.push("audience or recipient");
+  }
+
+  if (docType === "ebook") {
+    if (!lowerText.includes("topic")) missing.push("topic");
+    if (!lowerText.includes("purpose")) missing.push("purpose or goal");
+  }
+
+  return missing;
+}
+
+function generateDocument() {
+  const docTypeEl = document.getElementById("docType");
   const input = document.getElementById("userInput");
   const preview = document.getElementById("preview");
   const modeLabel = document.getElementById("previewModeLabel");
@@ -16,9 +74,29 @@ function updatePreview() {
 
   if (!preview) return;
 
-  const text = input && input.value.trim()
-    ? input.value.trim()
-    : "Your document preview will appear here...";
+  const docType = docTypeEl ? docTypeEl.value : "";
+  const text = input ? input.value.trim() : "";
+
+  const missing = getMissingInfo(docType, text);
+
+  if (missing.length > 0) {
+    if (missing.length === 1 && missing[0].includes("Please select")) {
+      setAssistantMessage(missing[0]);
+      return;
+    }
+
+    if (missing.length === 1 && missing[0].includes("More information is needed")) {
+      setAssistantMessage(
+        "More information is needed before FormatFlow can generate this document. Please provide additional details so the document can be structured professionally."
+      );
+      return;
+    }
+
+    setAssistantMessage(
+      `More information is needed to generate this professional ${formatDocTypeLabel(docType)}. Please add: ${missing.join(", ")}.`
+    );
+    return;
+  }
 
   preview.className = "document-page " + currentTemplate;
   preview.innerHTML = `
@@ -34,7 +112,23 @@ function updatePreview() {
     pageIndicator.textContent = `Page ${currentPage}`;
   }
 
+  setAssistantMessage(
+    `Your ${formatDocTypeLabel(docType)} has been generated in preview form. You can now refine it using the available tools.`
+  );
+
   applyZoom();
+}
+
+function formatDocTypeLabel(docType) {
+  const map = {
+    "resume": "resume",
+    "cover-letter": "cover letter",
+    "resignation-letter": "resignation letter",
+    "legal": "legal document",
+    "business": "business document",
+    "ebook": "eBook or written content"
+  };
+  return map[docType] || "document";
 }
 
 function escapeHtml(text) {
@@ -68,14 +162,16 @@ function zoomReset() {
 function nextPage() {
   if (currentPage < totalPages) {
     currentPage++;
-    updatePreview();
+    const pageIndicator = document.getElementById("pageIndicator");
+    if (pageIndicator) pageIndicator.textContent = `Page ${currentPage}`;
   }
 }
 
 function prevPage() {
   if (currentPage > 1) {
     currentPage--;
-    updatePreview();
+    const pageIndicator = document.getElementById("pageIndicator");
+    if (pageIndicator) pageIndicator.textContent = `Page ${currentPage}`;
   }
 }
 
@@ -91,21 +187,23 @@ function expandPreview() {
 }
 
 function rewrite(type) {
-  alert("Rewrite function placeholder: " + type);
+  setAssistantMessage(
+    `The "${type}" refinement tool is present and ready for backend AI wiring.`
+  );
 }
 
 function exportPDF() {
-  alert("PDF export coming next");
+  setAssistantMessage("PDF export control is present and ready for backend/export wiring.");
 }
 
 function exportDOCX() {
-  alert("DOCX export coming next");
+  setAssistantMessage("DOCX export control is present and ready for backend/export wiring.");
 }
 
 function handleFileUpload(event) {
   const file = event.target.files && event.target.files[0];
-  const modeLabel = document.getElementById("previewModeLabel");
   const input = document.getElementById("userInput");
+  const modeLabel = document.getElementById("previewModeLabel");
 
   if (!file) return;
 
@@ -114,60 +212,38 @@ function handleFileUpload(event) {
   if (fileName.endsWith(".txt")) {
     const reader = new FileReader();
     reader.onload = function(e) {
-      if (input) {
-        input.value = e.target.result;
-      }
-      if (modeLabel) {
-        modeLabel.textContent = "Uploaded TXT → Formatted Preview";
-      }
-      updatePreview();
+      if (input) input.value = e.target.result;
+      if (modeLabel) modeLabel.textContent = "Uploaded TXT Ready";
+      setAssistantMessage("TXT file uploaded successfully. Review the content, then click Generate Document.");
     };
     reader.readAsText(file);
     return;
   }
 
   if (fileName.endsWith(".pdf")) {
-    if (modeLabel) {
-      modeLabel.textContent = "PDF Upload Ready for Preview";
-    }
-    alert("PDF preview structure is ready. Full PDF rendering can be wired next.");
+    if (modeLabel) modeLabel.textContent = "PDF Upload Ready";
+    setAssistantMessage("PDF upload detected. Full PDF preview wiring is the next backend/viewer step.");
     return;
   }
 
-  if (
-    fileName.endsWith(".doc") ||
-    fileName.endsWith(".docx")
-  ) {
-    if (modeLabel) {
-      modeLabel.textContent = "DOC/DOCX Upload Ready for Conversion";
-    }
-    alert("DOC/DOCX conversion flow is the next wiring step.");
+  if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
+    if (modeLabel) modeLabel.textContent = "DOC/DOCX Upload Ready";
+    setAssistantMessage("DOC/DOCX upload detected. Conversion and formatting wiring is the next backend step.");
     return;
   }
 
-  if (
-    fileName.endsWith(".png") ||
-    fileName.endsWith(".jpg") ||
-    fileName.endsWith(".jpeg")
-  ) {
-    if (modeLabel) {
-      modeLabel.textContent = "Image Upload Ready for Preview";
-    }
-    alert("Image preview flow can be wired next.");
+  if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
+    if (modeLabel) modeLabel.textContent = "Image Upload Ready";
+    setAssistantMessage("Image upload detected. Image preview wiring is the next viewer step.");
     return;
   }
 
-  alert("Unsupported file type.");
+  setAssistantMessage("Unsupported file type.");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const input = document.getElementById("userInput");
   const fileUpload = document.getElementById("fileUpload");
   const templateSelect = document.getElementById("templateSelect");
-
-  if (input) {
-    input.addEventListener("input", updatePreview);
-  }
 
   if (fileUpload) {
     fileUpload.addEventListener("change", handleFileUpload);
@@ -177,5 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
     templateSelect.value = currentTemplate;
   }
 
-  updatePreview();
+  setAssistantMessage(
+    "Select a document type, then upload, paste, or type your content. When ready, click Generate Document."
+  );
 });
