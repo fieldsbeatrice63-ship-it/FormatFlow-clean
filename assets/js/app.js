@@ -14,57 +14,6 @@ function setAssistantMessage(message) {
   }
 }
 
-function getMissingInfo(docType, text) {
-  const lowerText = text.toLowerCase();
-
-  if (!docType) {
-    return ["Please select a document type before generating your document."];
-  }
-
-  if (text.trim().length < 20) {
-    return ["More information is needed before FormatFlow can generate a professional document."];
-  }
-
-  const missing = [];
-
-  if (docType === "resume") {
-    if (!lowerText.includes("name")) missing.push("full name");
-    if (!lowerText.includes("experience")) missing.push("work experience");
-    if (!lowerText.includes("skill")) missing.push("skills");
-    if (!lowerText.includes("education")) missing.push("education");
-  }
-
-  if (docType === "cover-letter") {
-    if (!lowerText.includes("position")) missing.push("position or role");
-    if (!lowerText.includes("company")) missing.push("company name");
-    if (!lowerText.includes("experience")) missing.push("relevant experience");
-  }
-
-  if (docType === "resignation-letter") {
-    if (!lowerText.includes("position")) missing.push("current position");
-    if (!lowerText.includes("date")) missing.push("effective date");
-  }
-
-  if (docType === "legal") {
-    if (!lowerText.includes("date")) missing.push("relevant date");
-    if (!lowerText.includes("party")) missing.push("parties involved");
-    if (!lowerText.includes("term")) missing.push("terms or purpose");
-  }
-
-  if (docType === "business") {
-    if (!lowerText.includes("company")) missing.push("company name");
-    if (!lowerText.includes("purpose")) missing.push("document purpose");
-    if (!lowerText.includes("audience")) missing.push("audience or recipient");
-  }
-
-  if (docType === "ebook") {
-    if (!lowerText.includes("topic")) missing.push("topic");
-    if (!lowerText.includes("purpose")) missing.push("purpose or goal");
-  }
-
-  return missing;
-}
-
 async function generateDocument() {
   const input = document.getElementById("userInput");
   const preview = document.getElementById("preview");
@@ -102,40 +51,6 @@ async function generateDocument() {
     console.error(error);
     setAssistantMessage("An error occurred while generating the document.");
   }
-}
-
-    if (missing.length === 1 && missing[0].includes("More information is needed")) {
-      setAssistantMessage(
-        "More information is needed before FormatFlow can generate this document. Please provide additional details so the document can be structured professionally."
-      );
-      return;
-    }
-
-    setAssistantMessage(
-      `More information is needed to generate this professional ${formatDocTypeLabel(docType)}. Please add: ${missing.join(", ")}.`
-    );
-    return;
-  }
-
-  preview.className = "document-page " + currentTemplate;
-  preview.innerHTML = `
-    <div class="preview-content">${escapeHtml(text)}</div>
-    <div class="watermark">FormatFlow Preview</div>
-  `;
-
-  if (modeLabel) {
-    modeLabel.textContent = "FormatFlow Preview";
-  }
-
-  if (pageIndicator) {
-    pageIndicator.textContent = `Page ${currentPage}`;
-  }
-
-  setAssistantMessage(
-    `Your ${formatDocTypeLabel(docType)} has been generated in preview form. You can now refine it using the available tools.`
-  );
-
-  applyZoom();
 }
 
 function formatDocTypeLabel(docType) {
@@ -206,9 +121,7 @@ function expandPreview() {
 }
 
 function rewrite(type) {
-  setAssistantMessage(
-    `The "${type}" refinement tool is present and ready for backend AI wiring.`
-  );
+  setAssistantMessage(`The "${type}" refinement tool is present and ready for backend AI wiring.`);
 }
 
 function exportPDF() {
