@@ -208,45 +208,9 @@ function exportPDF() {
 }
 
 function exportDOCX() {
-  const preview = document.getElementById("preview");
-
-  if (!preview || !preview.innerText.trim() || preview.innerText.includes("Your document preview will appear here")) {
-    setAssistantMessage("Please generate a document before downloading a DOC file.");
-    return;
-  }
-
-  try {
-    setAssistantMessage("Preparing your document download...");
-
-    const html = `
-      <html xmlns:o="urn:schemas-microsoft-com:office:office"
-            xmlns:w="urn:schemas-microsoft-com:office:word"
-            xmlns="http://www.w3.org/TR/REC-html40">
-      <head>
-        <meta charset="utf-8">
-        <title>FormatFlow Document</title>
-      </head>
-      <body>${preview.innerHTML}</body>
-      </html>
-    `;
-
-    const blob = new Blob(["\ufeff", html], {
-      type: "application/msword"
-    });
-
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "formatflow-document.doc";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    setAssistantMessage("Your document has been downloaded successfully.");
-
-  } catch (error) {
-    console.error(error);
-    setAssistantMessage("There was a problem creating your document file.");
-  }
+  setAssistantMessage(
+    "Your document is complete and professionally structured. 🎉\n\nYou can download the editable version for $2.99, or continue with one of the available access plans for ongoing document creation and refinement."
+  );
 }
 async function handleFileUpload(event) {
   const file = event.target.files && event.target.files[0];
