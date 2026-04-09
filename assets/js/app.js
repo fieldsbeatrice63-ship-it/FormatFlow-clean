@@ -48,8 +48,10 @@ async function generateDocument() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        content: text
-      })
+  content: text,
+  docType,
+  template
+})
     });
 
     const data = await response.json();
