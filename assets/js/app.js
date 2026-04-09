@@ -201,53 +201,10 @@ function expandPreview() {
   }
 }
 
-async function exportPDF() {
-  const preview = document.getElementById("preview");
-
-  if (!preview || !preview.innerText.trim() || preview.innerText.includes("Your document preview will appear here")) {
-    setAssistantMessage("Please generate a document before downloading a PDF.");
-    return;
-  }
-
-  try {
-    setAssistantMessage("Preparing your PDF download...");
-
-    const canvas = await html2canvas(preview, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: "#ffffff"
-    });
-
-    const imgData = canvas.toDataURL("image/png");
-    const { jsPDF } = window.jspdf;
-
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pageWidth = 210;
-    const pageHeight = 297;
-
-    const imgWidth = pageWidth - 20;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position = 10;
-
-    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-    heightLeft -= (pageHeight - 20);
-
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight + 10;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-      heightLeft -= (pageHeight - 20);
-    }
-
-    pdf.save("formatflow-document.pdf");
-    setAssistantMessage("Your PDF has been downloaded successfully.");
-
-  } catch (error) {
-    console.error(error);
-    setAssistantMessage("There was a problem creating your PDF.");
-  }
+function exportPDF() {
+  setAssistantMessage(
+    "Your document has been prepared successfully. 🎉\n\nA polished version is ready for download.\n\nYou may access your formatted PDF for $2.99, or continue with one of the available access plans for extended use."
+  );
 }
 
 function exportDOCX() {
