@@ -17,48 +17,112 @@
   </div>
 </nav>
 
-<main class="app-container">
-  <section class="input-panel">
-    <h2>Build Your Document</h2>
+<main class="app-shell">
+  <section class="workspace-panel">
 
-    <label for="docType">Select Document Type</label>
-    <select id="docType">
-      <option>Resume</option>
-      <option>Legal</option>
-      <option>Business</option>
-      <option>eBook</option>
-    </select>
-
-    <label>Choose Template</label>
-    <div class="templates">
-      <button type="button" onclick="selectTemplate('template1')">Template 1</button>
-      <button type="button" onclick="selectTemplate('template2')">Template 2</button>
-      <button type="button" onclick="selectTemplate('template3')">Template 3</button>
+    <div class="panel-block">
+      <h1>Build Your Document</h1>
+      <p class="panel-intro">
+        Upload a file, paste your content, choose a document type, and apply a professional template.
+      </p>
     </div>
 
-    <label for="userInput">Paste or type your content</label>
-    <textarea id="userInput" placeholder="Paste or type your content here..."></textarea>
-
-    <div class="actions">
-      <button type="button" onclick="rewrite('professional')">Make Professional</button>
-      <button type="button" onclick="rewrite('shorten')">Shorten</button>
-      <button type="button" onclick="rewrite('expand')">Expand</button>
-      <button type="button" onclick="rewrite('fix')">Fix Grammar</button>
+    <div class="panel-block">
+      <label for="docType">Document Type</label>
+      <select id="docType">
+        <option value="resume">Resume</option>
+        <option value="cover-letter">Cover Letter</option>
+        <option value="resignation-letter">Resignation Letter</option>
+        <option value="legal">Legal Document</option>
+        <option value="business">Business Document</option>
+        <option value="ebook">eBook / Written Content</option>
+      </select>
     </div>
 
-    <div class="export">
-      <button type="button" onclick="exportPDF()">Download PDF</button>
-      <button type="button" onclick="exportDOCX()">Download DOCX</button>
+    <div class="panel-block">
+      <label for="templateSelect">Choose Template</label>
+      <select id="templateSelect" onchange="selectTemplate(this.value)">
+        <option value="resume-classic">Resume Classic</option>
+        <option value="resume-modern">Resume Modern</option>
+        <option value="business-formal">Business Formal</option>
+        <option value="legal-standard">Legal Standard</option>
+        <option value="ebook-clean">eBook Clean</option>
+      </select>
     </div>
+
+    <div class="panel-block">
+      <label for="fileUpload">Upload File</label>
+      <input
+        id="fileUpload"
+        type="file"
+        accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg"
+      />
+      <p class="helper-text">
+        Upload PDF for direct preview. DOC/DOCX files can be converted and formatted into the selected template.
+      </p>
+    </div>
+
+    <div class="panel-block">
+      <label for="userInput">Paste or Type Content</label>
+      <textarea
+        id="userInput"
+        placeholder="Paste, type, or upload your content here..."
+      ></textarea>
+    </div>
+
+    <div class="panel-block">
+      <label>Rewrite Tools</label>
+      <div class="tool-grid">
+        <button type="button" onclick="rewrite('fix')">Fix Grammar</button>
+        <button type="button" onclick="rewrite('professional')">Make Professional</button>
+        <button type="button" onclick="rewrite('shorten')">Shorten</button>
+        <button type="button" onclick="rewrite('expand')">Expand</button>
+        <button type="button" onclick="rewrite('simplify')">Simplify</button>
+      </div>
+    </div>
+
+    <div class="panel-block">
+      <label>Export</label>
+      <div class="tool-grid">
+        <button type="button" onclick="exportPDF()">Download PDF</button>
+        <button type="button" onclick="exportDOCX()">Download DOCX</button>
+      </div>
+    </div>
+
   </section>
 
-  <section class="preview-panel">
-    <div class="page" id="preview">
-      <div class="preview-content">
-        Your document preview will appear here...
+  <section class="viewer-panel">
+    <div class="viewer-toolbar">
+      <div class="viewer-left">
+        <strong>Preview</strong>
+        <span id="previewModeLabel" class="mode-pill">FormatFlow Preview</span>
       </div>
-      <div class="watermark">FormatFlow Preview</div>
+
+      <div class="viewer-controls">
+        <button type="button" onclick="zoomOut()">−</button>
+        <button type="button" onclick="zoomReset()">100%</button>
+        <button type="button" onclick="zoomIn()">+</button>
+        <button type="button" onclick="prevPage()">‹</button>
+        <span id="pageIndicator">Page 1</span>
+        <button type="button" onclick="nextPage()">›</button>
+        <button type="button" onclick="expandPreview()">Expand</button>
+      </div>
     </div>
+
+    <div class="viewer-frame">
+      <div id="previewViewport" class="preview-viewport">
+        <div id="preview" class="document-page">
+          <div class="preview-content">
+            Your document preview will appear here...
+          </div>
+          <div class="watermark">FormatFlow Preview</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="viewer-note">
+      PDFs should display in a controlled viewer. DOC/DOCX content should be converted into a formatted FormatFlow preview.
+    </p>
   </section>
 </main>
 
