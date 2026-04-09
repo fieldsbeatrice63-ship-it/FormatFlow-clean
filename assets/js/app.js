@@ -58,7 +58,11 @@ async function generateDocument() {
 
     preview.innerHTML = `
       <div class="preview-content">${data.output}</div>
-     <div class="watermark">FORMATFLOW PREVIEW · FORMATFLOW PREVIEW · FORMATFLOW PREVIEW</div>
+    <div class="watermark">
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
+</div>
     `;
 
     setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
@@ -100,7 +104,11 @@ async function rewrite(type) {
 
     preview.innerHTML = `
       <div class="preview-content">${data.output}</div>
-     <div class="watermark">FORMATFLOW PREVIEW · FORMATFLOW PREVIEW · FORMATFLOW PREVIEW</div>
+    <div class="watermark">
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
+</div>
     `;
 
     setAssistantMessage("Your document has been refined successfully.");
@@ -134,7 +142,11 @@ function clearSession() {
   if (preview) {
     preview.innerHTML = `
       <div class="preview-content">Your document preview will appear here...</div>
-    <div class="watermark">FORMATFLOW PREVIEW · FORMATFLOW PREVIEW · FORMATFLOW PREVIEW</div>
+   <div class="watermark">
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
+FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
+</div>
     `;
     preview.style.transform = "scale(1)";
     preview.style.transformOrigin = "top center";
