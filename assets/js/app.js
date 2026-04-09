@@ -201,52 +201,33 @@ function expandPreview() {
   }
 }
 
+function openUnlockModal(message, link) {
+  const modal = document.getElementById("unlockModal");
+  const unlockMessage = document.getElementById("unlockMessage");
+  const singleUnlockBtn = document.getElementById("singleUnlockBtn");
+
+  if (unlockMessage) unlockMessage.textContent = message;
+  if (singleUnlockBtn) singleUnlockBtn.href = link || "#";
+  if (modal) modal.classList.remove("hidden");
+}
+
+function closeUnlockModal() {
+  const modal = document.getElementById("unlockModal");
+  if (modal) modal.classList.add("hidden");
+}
+
 function exportPDF() {
-  setAssistantMessage(
-    "Your document has been prepared successfully. 🎉\n\nA polished version is ready for download.\n\nYou may access your formatted PDF for $2.99, or continue with one of the available access plans for extended use."
+  openUnlockModal(
+    "Your formatted PDF is ready for secure access. You may unlock this completed document for $2.99 per document, or review the available plans for continued use.",
+    "https://buy.stripe.com/aFa9AS4Rlg7f3kMdNf3ks00"
   );
 }
 
 function exportDOCX() {
-  setAssistantMessage(
-    "Your document is complete and professionally structured. 🎉\n\nYou can download the editable version for $2.99, or continue with one of the available access plans for ongoing document creation and refinement."
+  openUnlockModal(
+    "Your editable document is ready for secure access. You may unlock this completed document for $2.99 per document, or review the available plans for continued use.",
+    "https://buy.stripe.com/aFa9AS4Rlg7f3kMdNf3ks00"
   );
-}
-async function handleFileUpload(event) {
-  const file = event.target.files && event.target.files[0];
-  const input = document.getElementById("userInput");
-  const modeLabel = document.getElementById("previewModeLabel");
-
-  if (!file) return;
-
-  setAssistantMessage("Uploading and processing your file. Please wait...");
-
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const response = await fetch("https://format-flow-backend.onrender.com/api/parse-upload", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await response.json();
-
-    if (!data.extractedText) {
-      setAssistantMessage("I couldn’t extract readable content from that file. Please try another file or paste your content.");
-      return;
-    }
-
-    if (input) input.value = data.extractedText;
-
-    if (modeLabel) modeLabel.textContent = "Document Loaded";
-
-    setAssistantMessage("Your document has been successfully loaded. You can now refine or generate it professionally.");
-
-  } catch (error) {
-    console.error(error);
-    setAssistantMessage("There was a problem processing your file. Please try again.");
-  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
