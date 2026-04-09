@@ -145,7 +145,23 @@
     </p>
   </section>
 </main>
-
+<div id="unlockModal" class="unlock-modal hidden">
+  <div class="unlock-card">
+    <button type="button" class="unlock-close" onclick="closeUnlockModal()">×</button>
+    <div class="unlock-icon">🎉</div>
+    <h3>Your document is ready</h3>
+    <p id="unlockMessage">
+      Your document has been completed successfully and is ready for secure access.
+    </p>
+    <div class="unlock-actions">
+      <a id="singleUnlockBtn" href="#" target="_blank" class="unlock-primary">Access for $2.99</a>
+      <a id="plansBtn" href="pricing.html" class="unlock-secondary">See Plans</a>
+    </div>
+    <p class="unlock-note">
+      Single-document access is ideal for one completed file. Extended use is available through one of the active plans.
+    </p>
+  </div>
+</div>
 <script src="assets/js/app.js"></script>
 </body>
 </html>
