@@ -189,17 +189,12 @@ function handleFileUpload(event) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const fileUpload = document.getElementById("fileUpload");
-  const templateSelect = document.getElementById("templateSelect");
 
   if (fileUpload) {
     fileUpload.addEventListener("change", handleFileUpload);
   }
 
-  if (templateSelect) {
-    templateSelect.value = currentTemplate;
-  }
-
   setAssistantMessage(
-    "Select a document type, then upload, paste, or type your content. When ready, click Generate Document."
+    "Select a document type, choose a template, then upload, paste, or type your content. When ready, click Generate Document."
   );
 });
