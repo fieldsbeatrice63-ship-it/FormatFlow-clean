@@ -207,45 +207,41 @@ function exportDOCX() {
   setAssistantMessage("DOCX export is present and will be connected next.");
 }
 
-function handleFileUpload(event) {
+async function handleFileUpload(event) {
   const file = event.target.files && event.target.files[0];
   const input = document.getElementById("userInput");
   const modeLabel = document.getElementById("previewModeLabel");
 
   if (!file) return;
 
-  const fileName = file.name.toLowerCase();
+  setAssistantMessage("Uploading and processing your file. Please wait...");
 
-  if (fileName.endsWith(".txt")) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      if (input) input.value = e.target.result;
-      if (modeLabel) modeLabel.textContent = "Uploaded TXT Ready";
-      setAssistantMessage("TXT file uploaded successfully. Review the content, then click Generate Document.");
-    };
-    reader.readAsText(file);
-    return;
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("https://format-flow-backend.onrender.com/api/parse-upload", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (!data.extractedText) {
+      setAssistantMessage("I couldn’t extract readable content from that file. Please try another file or paste your content.");
+      return;
+    }
+
+    if (input) input.value = data.extractedText;
+
+    if (modeLabel) modeLabel.textContent = "Document Loaded";
+
+    setAssistantMessage("Your document has been successfully loaded. You can now refine or generate it professionally.");
+
+  } catch (error) {
+    console.error(error);
+    setAssistantMessage("There was a problem processing your file. Please try again.");
   }
-
-  if (fileName.endsWith(".pdf")) {
-    if (modeLabel) modeLabel.textContent = "PDF Upload Ready";
-    setAssistantMessage("PDF upload detected. Full PDF preview wiring is the next step.");
-    return;
-  }
-
-  if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
-    if (modeLabel) modeLabel.textContent = "DOC/DOCX Upload Ready";
-    setAssistantMessage("DOC or DOCX upload detected. Conversion and formatting will be connected next.");
-    return;
-  }
-
-  if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
-    if (modeLabel) modeLabel.textContent = "Image Upload Ready";
-    setAssistantMessage("Image upload detected. Image preview wiring will be connected next.");
-    return;
-  }
-
-  setAssistantMessage("Unsupported file type.");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
