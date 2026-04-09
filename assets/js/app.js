@@ -1,4 +1,4 @@
-let currentTemplate = "resume-classic";
+let currentTemplate = "";
 let currentZoom = 1;
 let currentPage = 1;
 let totalPages = 1;
@@ -60,6 +60,7 @@ async function generateDocument() {
     `;
 
     setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
+    applyZoom();
 
   } catch (error) {
     console.error(error);
@@ -67,16 +68,80 @@ async function generateDocument() {
   }
 }
 
-function formatDocTypeLabel(docType) {
-  const map = {
-    "resume": "resume",
-    "cover-letter": "cover letter",
-    "resignation-letter": "resignation letter",
-    "legal": "legal document",
-    "business": "business document",
-    "ebook": "eBook or written content"
-  };
-  return map[docType] || "document";
+async function rewrite(type) {
+  const preview = document.getElementById("preview");
+
+  if (!preview) return;
+
+  const content = preview.innerText.trim();
+
+  if (!content || content.length < 20) {
+    setAssistantMessage("There is no document available to refine yet. Please generate a document first.");
+    return;
+  }
+
+  setAssistantMessage("Refining your document now. Please wait.");
+
+  try {
+    const response = await fetch("https://format-flow-backend.onrender.com/api/rewrite-document", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content,
+        type
+      })
+    });
+
+    const data = await response.json();
+
+    preview.innerHTML = `
+      <div class="preview-content">${data.output}</div>
+      <div class="watermark">FormatFlow Preview</div>
+    `;
+
+    setAssistantMessage("Your document has been refined successfully.");
+    applyZoom();
+
+  } catch (error) {
+    console.error(error);
+    setAssistantMessage("There was a problem refining your document.");
+  }
+}
+
+function clearSession() {
+  const docType = document.getElementById("docType");
+  const template = document.getElementById("templateSelect");
+  const input = document.getElementById("userInput");
+  const preview = document.getElementById("preview");
+  const fileUpload = document.getElementById("fileUpload");
+  const modeLabel = document.getElementById("previewModeLabel");
+  const pageIndicator = document.getElementById("pageIndicator");
+
+  currentTemplate = "";
+  currentZoom = 1;
+  currentPage = 1;
+  totalPages = 1;
+
+  if (docType) docType.value = "";
+  if (template) template.value = "";
+  if (input) input.value = "";
+  if (fileUpload) fileUpload.value = "";
+
+  if (preview) {
+    preview.innerHTML = `
+      <div class="preview-content">Your document preview will appear here...</div>
+      <div class="watermark">FormatFlow Preview</div>
+    `;
+    preview.style.transform = "scale(1)";
+    preview.style.transformOrigin = "top center";
+  }
+
+  if (modeLabel) modeLabel.textContent = "FormatFlow Preview";
+  if (pageIndicator) pageIndicator.textContent = "Page 1";
+
+  setAssistantMessage("Select a document type, choose a template, then upload, paste, or type your content. When ready, click Generate Document.");
 }
 
 function escapeHtml(text) {
@@ -134,16 +199,12 @@ function expandPreview() {
   }
 }
 
-function rewrite(type) {
-  setAssistantMessage(`The "${type}" refinement tool is present and ready for backend AI wiring.`);
-}
-
 function exportPDF() {
-  setAssistantMessage("PDF export control is present and ready for backend/export wiring.");
+  setAssistantMessage("PDF export is present and will be connected next.");
 }
 
 function exportDOCX() {
-  setAssistantMessage("DOCX export control is present and ready for backend/export wiring.");
+  setAssistantMessage("DOCX export is present and will be connected next.");
 }
 
 function handleFileUpload(event) {
@@ -168,50 +229,25 @@ function handleFileUpload(event) {
 
   if (fileName.endsWith(".pdf")) {
     if (modeLabel) modeLabel.textContent = "PDF Upload Ready";
-    setAssistantMessage("PDF upload detected. Full PDF preview wiring is the next backend/viewer step.");
+    setAssistantMessage("PDF upload detected. Full PDF preview wiring is the next step.");
     return;
   }
 
   if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
     if (modeLabel) modeLabel.textContent = "DOC/DOCX Upload Ready";
-    setAssistantMessage("DOC/DOCX upload detected. Conversion and formatting wiring is the next backend step.");
+    setAssistantMessage("DOC or DOCX upload detected. Conversion and formatting will be connected next.");
     return;
   }
 
   if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
     if (modeLabel) modeLabel.textContent = "Image Upload Ready";
-    setAssistantMessage("Image upload detected. Image preview wiring is the next viewer step.");
+    setAssistantMessage("Image upload detected. Image preview wiring will be connected next.");
     return;
   }
 
   setAssistantMessage("Unsupported file type.");
 }
-function clearSession() {
-  const docType = document.getElementById("docType");
-  const template = document.getElementById("templateSelect");
-  const input = document.getElementById("userInput");
-  const preview = document.getElementById("preview");
-  const fileUpload = document.getElementById("fileUpload");
-  const modeLabel = document.getElementById("previewModeLabel");
-  const pageIndicator = document.getElementById("pageIndicator");
 
-  if (docType) docType.value = "";
-  if (template) template.value = "";
-  if (input) input.value = "";
-  if (fileUpload) fileUpload.value = "";
-
-  if (preview) {
-    preview.innerHTML = `
-      <div class="preview-content">Your document preview will appear here...</div>
-      <div class="watermark">FormatFlow Preview</div>
-    `;
-  }
-
-  if (modeLabel) modeLabel.textContent = "FormatFlow Preview";
-  if (pageIndicator) pageIndicator.textContent = "Page 1";
-
-  setAssistantMessage("Select a document type, choose a template, then upload, paste, or type your content. When ready, click Generate Document.");
-}
 document.addEventListener("DOMContentLoaded", function () {
   const fileUpload = document.getElementById("fileUpload");
 
