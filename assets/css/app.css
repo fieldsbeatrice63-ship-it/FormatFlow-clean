@@ -147,14 +147,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 42px;
-  font-weight: 700;
-  color: rgba(49, 77, 66, 0.16);
+  font-size: 58px;
+  font-weight: 800;
+  color: rgba(49, 77, 66, 0.22);
   transform: rotate(-28deg);
   pointer-events: none;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.6;
   z-index: 3;
+  padding: 30px;
+}
 }
 .viewer-panel {
   display: flex;
