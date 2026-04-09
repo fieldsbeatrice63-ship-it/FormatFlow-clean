@@ -186,7 +186,32 @@ function handleFileUpload(event) {
 
   setAssistantMessage("Unsupported file type.");
 }
+function clearSession() {
+  const docType = document.getElementById("docType");
+  const template = document.getElementById("templateSelect");
+  const input = document.getElementById("userInput");
+  const preview = document.getElementById("preview");
+  const fileUpload = document.getElementById("fileUpload");
+  const modeLabel = document.getElementById("previewModeLabel");
+  const pageIndicator = document.getElementById("pageIndicator");
 
+  if (docType) docType.value = "";
+  if (template) template.value = "";
+  if (input) input.value = "";
+  if (fileUpload) fileUpload.value = "";
+
+  if (preview) {
+    preview.innerHTML = `
+      <div class="preview-content">Your document preview will appear here...</div>
+      <div class="watermark">FormatFlow Preview</div>
+    `;
+  }
+
+  if (modeLabel) modeLabel.textContent = "FormatFlow Preview";
+  if (pageIndicator) pageIndicator.textContent = "Page 1";
+
+  setAssistantMessage("Select a document type, choose a template, then upload, paste, or type your content. When ready, click Generate Document.");
+}
 document.addEventListener("DOMContentLoaded", function () {
   const fileUpload = document.getElementById("fileUpload");
 
