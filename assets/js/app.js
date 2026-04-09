@@ -15,17 +15,31 @@ function setAssistantMessage(message) {
 }
 
 async function generateDocument() {
+  const docTypeEl = document.getElementById("docType");
+  const templateEl = document.getElementById("templateSelect");
   const input = document.getElementById("userInput");
   const preview = document.getElementById("preview");
 
-  const text = input.value.trim();
+  const docType = docTypeEl ? docTypeEl.value : "";
+  const template = templateEl ? templateEl.value : "";
+  const text = input ? input.value.trim() : "";
 
-  if (text.length < 20) {
-    setAssistantMessage("More information is needed to generate a professional document.");
+  if (!docType) {
+    setAssistantMessage("Please select the type of document you want prepared so I can structure it correctly.");
     return;
   }
 
-  setAssistantMessage("Generating professional document...");
+  if (!template) {
+    setAssistantMessage("Please choose a template so I can format your document in the proper style.");
+    return;
+  }
+
+  if (text.length < 20) {
+    setAssistantMessage("I need a little more information before I can prepare this properly. Please add the details you want included, then generate again.");
+    return;
+  }
+
+  setAssistantMessage("I’m preparing your document now. Please wait while I structure it professionally.");
 
   try {
     const response = await fetch("https://format-flow-backend.onrender.com/api/generate-document", {
@@ -45,11 +59,11 @@ async function generateDocument() {
       <div class="watermark">FormatFlow Preview</div>
     `;
 
-    setAssistantMessage("Document generated successfully.");
+    setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
 
   } catch (error) {
     console.error(error);
-    setAssistantMessage("An error occurred while generating the document.");
+    setAssistantMessage("There was a problem preparing your document. Please try again.");
   }
 }
 
