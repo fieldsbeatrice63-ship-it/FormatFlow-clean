@@ -4,7 +4,7 @@ let currentPage = 1;
 let totalPages = 1;
 
 function selectTemplate(template) {
-  currentTemplate = template;
+  currentTemplate = template || "";
 }
 
 function setAssistantMessage(message) {
