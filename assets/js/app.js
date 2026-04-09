@@ -65,25 +65,44 @@ function getMissingInfo(docType, text) {
   return missing;
 }
 
-function generateDocument() {
-  const docTypeEl = document.getElementById("docType");
+async function generateDocument() {
   const input = document.getElementById("userInput");
   const preview = document.getElementById("preview");
-  const modeLabel = document.getElementById("previewModeLabel");
-  const pageIndicator = document.getElementById("pageIndicator");
 
-  if (!preview) return;
+  const text = input.value.trim();
 
-  const docType = docTypeEl ? docTypeEl.value : "";
-  const text = input ? input.value.trim() : "";
+  if (text.length < 20) {
+    setAssistantMessage("More information is needed to generate a professional document.");
+    return;
+  }
 
-  const missing = getMissingInfo(docType, text);
+  setAssistantMessage("Generating professional document...");
 
-  if (missing.length > 0) {
-    if (missing.length === 1 && missing[0].includes("Please select")) {
-      setAssistantMessage(missing[0]);
-      return;
-    }
+  try {
+    const response = await fetch("https://format-flow-backend.onrender.com/api/generate-document", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content: text
+      })
+    });
+
+    const data = await response.json();
+
+    preview.innerHTML = `
+      <div class="preview-content">${data.output}</div>
+      <div class="watermark">FormatFlow Preview</div>
+    `;
+
+    setAssistantMessage("Document generated successfully.");
+
+  } catch (error) {
+    console.error(error);
+    setAssistantMessage("An error occurred while generating the document.");
+  }
+}
 
     if (missing.length === 1 && missing[0].includes("More information is needed")) {
       setAssistantMessage(
