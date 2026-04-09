@@ -46,8 +46,8 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  flex: 1 1 auto;
 }
-
 .viewer-panel {
   display: flex;
   flex-direction: column;
