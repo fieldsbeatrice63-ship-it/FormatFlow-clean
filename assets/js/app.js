@@ -199,14 +199,96 @@ function expandPreview() {
   }
 }
 
-function exportPDF() {
-  setAssistantMessage("PDF export is present and will be connected next.");
+async function exportPDF() {
+  const preview = document.getElementById("preview");
+
+  if (!preview || !preview.innerText.trim() || preview.innerText.includes("Your document preview will appear here")) {
+    setAssistantMessage("Please generate a document before downloading a PDF.");
+    return;
+  }
+
+  try {
+    setAssistantMessage("Preparing your PDF download...");
+
+    const canvas = await html2canvas(preview, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff"
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pageWidth = 210;
+    const pageHeight = 297;
+
+    const imgWidth = pageWidth - 20;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 10;
+
+    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+    heightLeft -= (pageHeight - 20);
+
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight + 10;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+      heightLeft -= (pageHeight - 20);
+    }
+
+    pdf.save("formatflow-document.pdf");
+    setAssistantMessage("Your PDF has been downloaded successfully.");
+
+  } catch (error) {
+    console.error(error);
+    setAssistantMessage("There was a problem creating your PDF.");
+  }
 }
 
 function exportDOCX() {
-  setAssistantMessage("DOCX export is present and will be connected next.");
-}
+  const preview = document.getElementById("preview");
 
+  if (!preview || !preview.innerText.trim() || preview.innerText.includes("Your document preview will appear here")) {
+    setAssistantMessage("Please generate a document before downloading a DOC file.");
+    return;
+  }
+
+  try {
+    setAssistantMessage("Preparing your document download...");
+
+    const html = `
+      <html xmlns:o="urn:schemas-microsoft-com:office:office"
+            xmlns:w="urn:schemas-microsoft-com:office:word"
+            xmlns="http://www.w3.org/TR/REC-html40">
+      <head>
+        <meta charset="utf-8">
+        <title>FormatFlow Document</title>
+      </head>
+      <body>${preview.innerHTML}</body>
+      </html>
+    `;
+
+    const blob = new Blob(["\ufeff", html], {
+      type: "application/msword"
+    });
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "formatflow-document.doc";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setAssistantMessage("Your document has been downloaded successfully.");
+
+  } catch (error) {
+    console.error(error);
+    setAssistantMessage("There was a problem creating your document file.");
+  }
+}
 async function handleFileUpload(event) {
   const file = event.target.files && event.target.files[0];
   const input = document.getElementById("userInput");
