@@ -149,11 +149,54 @@
   justify-content: center;
   font-size: 42px;
   font-weight: 700;
-  color: rgba(49, 77, 66, 0.12);
+  color: rgba(49, 77, 66, 0.14);
   transform: rotate(-28deg);
   pointer-events: none;
   text-align: center;
   white-space: nowrap;
+  z-index: 2;
+}
+.viewer-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.viewer-frame {
+  background: #e9efe8;
+  border-radius: 12px;
+  padding: 12px;
+  height: 600px;
+  min-height: 600px;
+  max-height: 600px;
+  overflow: hidden;
+  flex: 0 0 600px;
+}
+
+.preview-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: white;
+  border-radius: 8px;
+}
+
+.document-page {
+  width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.preview-content {
+  position: relative;
+  z-index: 1;
+  white-space: pre-wrap;
+  line-height: 1.6;
 }
 @media (max-width: 900px) {
   .app-shell {
