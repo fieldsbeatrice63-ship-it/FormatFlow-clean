@@ -150,20 +150,30 @@
 }
 
 .watermark::before {
-  content: "FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW";
+  content: 
+    "FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW\n"
+    "FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW\n"
+    "FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW\n"
+    "FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW   FORMATFLOW PREVIEW";
+
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 180%;
-  transform: translate(-50%, -50%) rotate(-32deg);
-  transform-origin: center;
-  font-size: 34px;
-  font-weight: 800;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+
+  transform: rotate(-32deg);
+  transform-origin: top left;
+
+  font-size: 32px;
+  font-weight: 900;
   letter-spacing: 2px;
-  line-height: 2.4;
- color: rgba(0, 0, 0, 0.22);
-  text-align: center;
-  white-space: normal;
+  line-height: 2.2;
+
+  color: rgba(0, 0, 0, 0.28); /* 🔥 DARKER */
+
+  white-space: pre;
+  text-align: left;
 }
 .viewer-panel {
   display: flex;
