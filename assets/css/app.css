@@ -340,6 +340,25 @@
   margin-right: 10px;
   margin-top: 10px;
 }
+nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  background: #0f2a3c;
+  padding: 15px 30px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.start-btn {
+  background: #f4b942;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
 @media (max-width: 900px) {
   .app-shell {
     grid-template-columns: 1fr;
