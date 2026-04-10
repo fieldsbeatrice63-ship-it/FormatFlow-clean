@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FormatFlow Pricing</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f5;
+  margin: 0;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 40px 20px;
+}
+.header h1 {
+  color: #1f2a25;
+}
+.header p {
+  color: #5f6f66;
+}
+
+/* PRICING */
+.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: center;
+  position: relative;
+}
+
+.card h2 {
+  color: #1f2a25;
+}
+
+.price {
+  font-size: 28px;
+  color: #314d42;
+  font-weight: bold;
+}
+
+.tag {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #c5a85a;
+  color: #1f2a25;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.features {
+  text-align: left;
+  margin-top: 15px;
+}
+
+.features li {
+  margin-bottom: 8px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.primary {
+  background: #c5a85a;
+  color: #1f2a25;
+}
+
+.secondary {
+  background: #314d42;
+  color: white;
+}
+
+/* FAQ */
+.faq {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.faq h2 {
+  text-align: center;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+}
+
+.faq-item h4 {
+  margin-bottom: 5px;
+}
+
+/* TEMPLATE LIBRARY */
+.templates {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.templates h2 {
+  text-align: center;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 15px;
+}
+
+.template-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+<h1>Choose Your Access</h1>
+<p>Professional documents, built instantly.</p>
+</div>
+
+<div class="pricing-container">
+
+<!-- SINGLE -->
+<div class="card">
+<h2>Single Document</h2>
+<div class="price">$5.99</div>
+<ul class="features">
+<li>1 completed document</li>
+<li>Professional formatting</li>
+<li>Instant access</li>
+</ul>
+<a href="YOUR_STRIPE_599" class="btn primary">Access Now</a>
+</div>
+
+<!-- STARTER -->
+<div class="card">
+<h2>Starter</h2>
+<div class="price">$14.99</div>
+<ul class="features">
+<li>Up to 5 documents</li>
+<li>Resumes + letters</li>
+<li>Light usage</li>
+</ul>
+<a href="YOUR_STRIPE_1499" class="btn secondary">Choose Starter</a>
+</div>
+
+<!-- PRO -->
+<div class="card">
+<h2>Pro</h2>
+<div class="price">$39.99</div>
+<ul class="features">
+<li>Up to 20 documents</li>
+<li>Essays + business docs</li>
+<li>Extended usage</li>
+</ul>
+<a href="YOUR_STRIPE_3999" class="btn secondary">Choose Pro</a>
+</div>
+
+<!-- UNLIMITED -->
+<div class="card">
+<div class="tag">Most Popular</div>
+<h2>Unlimited</h2>
+<div class="price">$69.99</div>
+<ul class="features">
+<li>Unlimited document generation</li>
+<li>Best for eBooks + essays</li>
+<li>All templates included</li>
+<li>Unlimited standard use (fair use applies)</li>
+</ul>
+<a href="YOUR_STRIPE_6999" class="btn primary">Go Unlimited</a>
+</div>
+
+<!-- BUSINESS -->
+<div class="card">
+<h2>Business</h2>
+<div class="price">$129.99</div>
+<ul class="features">
+<li>Full platform access</li>
+<li>Best for legal + contracts</li>
+<li>Business workflows</li>
+<li>Advanced document use</li>
+</ul>
+<a href="YOUR_STRIPE_129" class="btn secondary">Choose Business</a>
+</div>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h4>What does unlimited standard use mean?</h4>
+<p>Unlimited document creation for normal personal or business use. Designed for consistent use without automated or excessive generation.</p>
+</div>
+
+<div class="faq-item">
+<h4>Can I create legal documents?</h4>
+<p>Yes. Business and Unlimited plans support legal-style documents such as agreements, contracts, and formal statements.</p>
+</div>
+
+<div class="faq-item">
+<h4>Can I create eBooks and essays?</h4>
+<p>Yes. Unlimited is best for long-form content like essays, eBooks, and repeated document creation.</p>
+</div>
+
+<div class="faq-item">
+<h4>Will my downloaded document include watermarks?</h4>
+<p>No. Final documents are delivered clean and ready for use after access is unlocked.</p>
+</div>
+
+<div class="faq-item">
+<h4>Can I upload my own file?</h4>
+<p>Yes. You can upload and refine your own documents for professional formatting.</p>
+</div>
+
+</div>
+
+<!-- TEMPLATE LIBRARY -->
+<div class="templates">
+<h2>Template Library</h2>
+
+<div class="template-grid">
+
+<div class="template-card">Resumes</div>
+<div class="template-card">Cover Letters</div>
+<div class="template-card">Essays</div>
+<div class="template-card">eBooks</div>
+<div class="template-card">Business Proposals</div>
+<div class="template-card">Lease Agreements</div>
+<div class="template-card">Contracts</div>
+<div class="template-card">Affidavits</div>
+
+</div>
+</div>
+
+</body>
+</html>
