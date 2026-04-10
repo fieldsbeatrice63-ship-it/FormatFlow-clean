@@ -230,15 +230,15 @@ function closeUnlockModal() {
 
 function exportPDF() {
   openUnlockModal(
-    "Your formatted PDF is ready for secure access. You may unlock this completed document for $2.99 per document, or review the available plans for continued use.",
-    "https://buy.stripe.com/aFa9AS4Rlg7f3kMdNf3ks00"
+    "Your formatted PDF is ready for secure access. You may unlock this completed document for $5.99 per document, or review the available plans for continued use.",
+    "https://buy.stripe.com/6oU6oG0B5dZ7dZq9wZ3ks05"
   );
 }
 
 function exportDOCX() {
   openUnlockModal(
-    "Your editable document is ready for secure access. You may unlock this completed document for $2.99 per document, or review the available plans for continued use.",
-    "https://buy.stripe.com/aFa9AS4Rlg7f3kMdNf3ks00"
+    "Your editable document is ready for secure access. You may unlock this completed document for $5.99 per document, or review the available plans for continued use.",
+    "https://buy.stripe.com/6oU6oG0B5dZ7dZq9wZ3ks05"
   );
 }
 
