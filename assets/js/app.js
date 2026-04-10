@@ -277,3 +277,66 @@ if (preview) {
     "Select a document type, choose a template, then upload, paste, or type your content. When ready, click Generate Document."
   );
 });
+// ===== TEMPLATE LOADER =====
+
+function getTemplateFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("template");
+}
+
+function loadSelectedTemplate() {
+  const template = getTemplateFromURL();
+
+  if (!template) return;
+
+  const preview = document.getElementById("preview");
+
+  if (!preview) return;
+
+  if (template === "classic-professional") {
+    preview.innerHTML = `
+      <div style="padding:40px; font-family:Arial;">
+        <h1>John Doe</h1>
+        <p>Professional Summary</p>
+        <hr/>
+        <p>Experience and details will generate here...</p>
+      </div>
+    `;
+  }
+
+  if (template === "modern-sidebar") {
+    preview.innerHTML = `
+      <div style="display:flex; height:100%;">
+        <div style="width:30%; background:#19a2b8; color:#fff; padding:20px;">
+          <h2>John Doe</h2>
+          <p>Skills</p>
+        </div>
+        <div style="padding:30px;">
+          <h3>Experience</h3>
+          <p>Content will populate here...</p>
+        </div>
+      </div>
+    `;
+  }
+
+  if (template === "lease-agreement") {
+    preview.innerHTML = `
+      <div style="padding:40px; font-family:Georgia;">
+        <h2 style="text-align:center;">Lease Agreement</h2>
+        <p>This agreement is between...</p>
+      </div>
+    `;
+  }
+
+  if (template === "business-proposal") {
+    preview.innerHTML = `
+      <div style="padding:40px;">
+        <h2>Business Proposal</h2>
+        <p>Overview, scope, deliverables...</p>
+      </div>
+    `;
+  }
+}
+
+// run when page loads
+document.addEventListener("DOMContentLoaded", loadSelectedTemplate);
