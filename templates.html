@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates | FormatFlow</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef5f8;
+      color: #1f2a25;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      background: #12354a;
+    }
+
+    .brand {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .cta-link {
+      background: #d9b24c;
+      color: #1f2a25 !important;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .page-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 48px;
+      line-height: 1.15;
+      color: #111111;
+    }
+
+    .hero p {
+      margin: 0 auto;
+      max-width: 780px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #5c6a63;
+    }
+
+    .tab-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 30px 0 40px;
+    }
+
+    .tab-button {
+      border: none;
+      background: transparent;
+      color: #111111;
+      font-size: 16px;
+      font-weight: 800;
+      padding: 14px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      background: #9be29b;
+    }
+
+    .template-section {
+      display: none;
+    }
+
+    .template-section.active {
+      display: block;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 26px;
+    }
+
+    .template-card {
+      background: #ffffff;
+      border-radius: 22px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .preview-sheet {
+      background: #ffffff;
+      border-radius: 18px;
+      min-height: 360px;
+      box-shadow: inset 0 0 0 1px rgba(31, 42, 37, 0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sheet-inner {
+      transform: scale(0.56);
+      transform-origin: top left;
+      width: 178%;
+      min-height: 620px;
+      background: #ffffff;
+    }
+
+    .template-meta {
+      padding: 16px 6px 6px;
+    }
+
+    .template-meta h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      color: #1f2a25;
+    }
+
+    .template-meta p {
+      margin: 0 0 16px;
+      color: #5a6761;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .use-btn {
+      display: inline-block;
+      background: #12354a;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: #efd28a;
+      color: #5a3d00;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      z-index: 4;
+    }
+
+    .color-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+
+    .color-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.08);
+      display: inline-block;
+    }
+
+    .resume-doc {
+      padding: 28px 30px;
+      min-height: 620px;
+      box-sizing: border-box;
+      position: relative;
+      background: #ffffff;
+      color: #1f2a25;
+    }
+
+    .resume-name {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .resume-sub {
+      font-size: 14px;
+      color: #6c7671;
+      margin-bottom: 18px;
+    }
+
+    .resume-rule {
+      height: 8px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      background: #d9d9d9;
+    }
+
+    .resume-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .resume-sidebar-layout {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      min-height: 620px;
+    }
+
+    .sidebar {
+      padding: 26px 18px;
+      color: #ffffff;
+    }
+
+    .sidebar h4,
+    .resume-block h4 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .resume-block {
+      margin-bottom: 18px;
+    }
+
+    .resume-line {
+      height: 8px;
+      background: #d7dbd8;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .resume-line.short { width: 46%; }
+    .resume-line.med { width: 72%; }
+    .resume-line.long { width: 100%; }
+
+    .resume-photo {
+      width: 82px;
+      height: 82px;
+      border-radius: 10px;
+      background: #ececec;
+      margin-bottom: 16px;
+    }
+
+    .main-content {
+      padding: 28px 26px;
+      background: #ffffff;
+    }
+
+    .legal-doc {
+      background: #ffffff;
+      min-height: 620px;
+      box-sizing: border-box;
+      padding: 38px 38px 28px;
+      color: #111111;
+      font-family: Georgia, serif;
+    }
+
+    .legal-title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .legal-subtitle {
+      text-align: center;
+      font-size: 13px;
+      margin-bottom: 24px;
+      letter-spacing: 0.4px;
+    }
+
+    .legal-paragraph {
+      height: 10px;
+      background: #d7d7d7;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .legal-paragraph.short { width: 58%; }
+    .legal-paragraph.med { width: 80%; }
+    .legal-paragraph.long { width: 100%; }
+
+    .legal-section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 22px 0 10px;
+      text-transform: uppercase;
+    }
+
+    .legal-fill {
+      height: 22px;
+      border-bottom: 2px solid #777777;
+      margin-bottom: 12px;
+    }
+
+    .doc-accent-gold { background: #b9a59d; }
+    .doc-accent-blue { background: #19a2b8; }
+    .doc-accent-green { background: #3b8b7a; }
+    .doc-accent-red { background: #c94855; }
+    .doc-accent-dark { background: #4c5a65; }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 40px;
+      color: #607068;
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .site-nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="brand">FormatFlow</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="how-it-works.html#faq">FAQ</a>
+      <a href="app.html" class="cta-link">Start Creating</a>
+    </div>
+  </nav>
+
+  <div class="page-shell">
+    <div class="hero">
+      <h1>Choose Your Template</h1>
+      <p>Browse clean, modern resume layouts and professional legal-style document formats designed to make your final output look worth paying for.</p>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-button active" onclick="showSection('resumeTemplates', this)">RESUMES</button>
+      <button class="tab-button" onclick="showSection('legalTemplates', this)">LEGAL + BUSINESS</button>
+    </div>
+
+    <section id="resumeTemplates" class="template-section active">
+      <div class="template-grid">
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="badge">Popular</div>
+            <div class="sheet-inner">
+              <div class="resume-doc">
+                <div class="resume-name">Daniel Johnson</div>
+                <div class="resume-sub">San Francisco, CA • 555-222-1010 • name@email.com</div>
+                <div class="resume-rule doc-accent-gold"></div>
+                <div class="resume-block">
+                  <h4>Summary</h4>
+                  <div class="resume-line long"></div>
+                  <div class="resume-line med"></div>
+                  <div class="resume-line long"></div>
+                </div>
+                <div class="resume-columns">
+                  <div>
+                    <div class="resume-block">
+                      <h4>Skills</h4>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line med"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="resume-block">
+                      <h4>Experience</h4>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line long"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="resume-block">
+                  <h4>Education</h4>
+                  <div class="resume-line med"></div>
+                  <div class="resume-line short"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <div class="color-row">
+              <span class="color-dot" style="background:#ffffff;"></span>
+              <span class="color-dot" style="background:#343a40;"></span>
+              <span class="color-dot" style="background:#b9a59d;"></span>
+              <span class="color-dot" style="background:#0f58aa;"></span>
+            </div>
+            <h3>Classic Professional</h3>
+            <p>Clean black-and-white structure with a soft premium accent. Best for polished, versatile resume submissions.</p>
+            <a href="app.html?template=classic-professional" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="resume-sidebar-layout">
+                <div class="sidebar doc-accent-blue">
+                  <div class="resume-photo"></div>
+                  <div class="resume-block">
+                    <h4>Contact</h4>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line med"></div>
+                    <div class="resume-line med"></div>
+                  </div>
+                  <div class="resume-block">
+                    <h4>Skills</h4>
+                    <div class="resume-line med"></div>
+                    <div class="resume-line med"></div>
+                    <div class="resume-line short"></div>
+                  </div>
+                </div>
+                <div class="main-content">
+                  <div class="resume-name">Daniel Johnson</div>
+                  <div class="resume-block">
+                    <h4>Experience</h4>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line med"></div>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line med"></div>
+                  </div>
+                  <div class="resume-block">
+                    <h4>Education</h4>
+                    <div class="resume-line med"></div>
+                    <div class="resume-line short"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <div class="color-row">
+              <span class="color-dot" style="background:#19a2b8;"></span>
+              <span class="color-dot" style="background:#c94855;"></span>
+              <span class="color-dot" style="background:#ffffff;"></span>
+            </div>
+            <h3>Modern Sidebar</h3>
+            <p>A bold sidebar layout with strong visual separation for contact, skills, and experience highlights.</p>
+            <a href="app.html?template=modern-sidebar" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="resume-doc">
+                <div class="resume-rule doc-accent-dark"></div>
+                <div class="resume-name">Daniel Johnson</div>
+                <div class="resume-sub">Executive Operations Leader</div>
+                <div class="resume-columns">
+                  <div>
+                    <div class="resume-block">
+                      <h4>Profile</h4>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line med"></div>
+                    </div>
+                    <div class="resume-block">
+                      <h4>Skills</h4>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line med"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="resume-block">
+                      <h4>Experience</h4>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line long"></div>
+                    </div>
+                    <div class="resume-block">
+                      <h4>Education</h4>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line short"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <div class="color-row">
+              <span class="color-dot" style="background:#4c5a65;"></span>
+              <span class="color-dot" style="background:#ffffff;"></span>
+            </div>
+            <h3>Executive Dark Header</h3>
+            <p>Best for leadership-level resumes that need a refined, commanding look without becoming overly decorative.</p>
+            <a href="app.html?template=executive-dark" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="resume-doc">
+                <div class="resume-name" style="color:#19a2b8;">Daniel Johnson</div>
+                <div class="resume-sub">Professional Summary • Skills • Experience • Education</div>
+                <div class="resume-columns">
+                  <div>
+                    <div class="resume-block">
+                      <h4>Summary</h4>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line med"></div>
+                    </div>
+                    <div class="resume-block">
+                      <h4>Education</h4>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line short"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="resume-block">
+                      <h4>Experience</h4>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line long"></div>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line long"></div>
+                    </div>
+                    <div class="resume-block">
+                      <h4>Skills</h4>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line med"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <div class="color-row">
+              <span class="color-dot" style="background:#19a2b8;"></span>
+              <span class="color-dot" style="background:#ffffff;"></span>
+            </div>
+            <h3>Clean Blue Accent</h3>
+            <p>Light, crisp, and easy to read. Best for professional roles that still benefit from subtle color.</p>
+            <a href="app.html?template=clean-blue" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="resume-doc">
+                <div class="resume-name">Daniel Johnson</div>
+                <div class="resume-sub">Minimal ATS Resume</div>
+                <div class="resume-block">
+                  <h4>Summary</h4>
+                  <div class="resume-line long"></div>
+                  <div class="resume-line long"></div>
+                </div>
+                <div class="resume-block">
+                  <h4>Experience</h4>
+                  <div class="resume-line long"></div>
+                  <div class="resume-line long"></div>
+                  <div class="resume-line med"></div>
+                  <div class="resume-line long"></div>
+                  <div class="resume-line med"></div>
+                </div>
+                <div class="resume-columns">
+                  <div>
+                    <div class="resume-block">
+                      <h4>Skills</h4>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line med"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="resume-block">
+                      <h4>Education</h4>
+                      <div class="resume-line med"></div>
+                      <div class="resume-line short"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <div class="color-row">
+              <span class="color-dot" style="background:#ffffff;"></span>
+              <span class="color-dot" style="background:#1f2a25;"></span>
+            </div>
+            <h3>Minimal ATS Clean</h3>
+            <p>Simple, black-and-white resume structure designed for clarity and applicant tracking compatibility.</p>
+            <a href="app.html?template=minimal-ats" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="resume-sidebar-layout">
+                <div class="sidebar doc-accent-red">
+                  <div class="resume-block">
+                    <h4>Contact</h4>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line med"></div>
+                  </div>
+                  <div class="resume-block">
+                    <h4>Skills</h4>
+                    <div class="resume-line med"></div>
+                    <div class="resume-line med"></div>
+                    <div class="resume-line short"></div>
+                  </div>
+                </div>
+                <div class="main-content">
+                  <div class="resume-name">Daniel Johnson</div>
+                  <div class="resume-block">
+                    <h4>Summary</h4>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line med"></div>
+                  </div>
+                  <div class="resume-block">
+                    <h4>Experience</h4>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line long"></div>
+                    <div class="resume-line med"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <div class="color-row">
+              <span class="color-dot" style="background:#c94855;"></span>
+              <span class="color-dot" style="background:#ffffff;"></span>
+            </div>
+            <h3>Bold Red Sidebar</h3>
+            <p>Stronger visual presence for users who want a more modern, attention-grabbing resume style.</p>
+            <a href="app.html?template=bold-red" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="legalTemplates" class="template-section">
+      <div class="template-grid">
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="legal-doc">
+                <div class="legal-title">Rental Agreement</div>
+                <div class="legal-subtitle">PARTIES • TERM • PAYMENT • PROPERTY USE</div>
+                <div class="legal-section-title">Parties</div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+                <div class="legal-section-title">Terms</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph med"></div>
+                <div class="legal-section-title">Payment</div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <h3>Lease Agreement</h3>
+            <p>A clean landlord-tenant format with proper legal structure and fill-in sections for practical use.</p>
+            <a href="app.html?template=lease-agreement" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="legal-doc">
+                <div class="legal-title">Non-Disclosure Agreement</div>
+                <div class="legal-subtitle">CONFIDENTIALITY • TERMS • SIGNATURES</div>
+                <div class="legal-section-title">Confidential Information</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph med"></div>
+                <div class="legal-section-title">Restrictions</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph med"></div>
+                <div class="legal-section-title">Execution</div>
+                <div class="legal-fill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <h3>NDA</h3>
+            <p>Professional confidentiality agreement layout for business disclosures and protected information exchange.</p>
+            <a href="app.html?template=nda" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="legal-doc">
+                <div class="legal-title">Loan Agreement</div>
+                <div class="legal-subtitle">LENDER • BORROWER • REPAYMENT TERMS</div>
+                <div class="legal-section-title">Parties</div>
+                <div class="legal-fill"></div>
+                <div class="legal-section-title">Loan Details</div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+                <div class="legal-section-title">Repayment</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph med"></div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <h3>Loan Agreement</h3>
+            <p>Simple, structured borrowing agreement layout with sections for repayment, parties, and terms.</p>
+            <a href="app.html?template=loan-agreement" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="legal-doc">
+                <div class="legal-title">Employment Contract</div>
+                <div class="legal-subtitle">ROLE • DUTIES • COMPENSATION • TERM</div>
+                <div class="legal-section-title">Employee Information</div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+                <div class="legal-section-title">Duties</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-section-title">Compensation</div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <h3>Employment Contract</h3>
+            <p>Clean hiring agreement format for businesses needing a straightforward employee contract structure.</p>
+            <a href="app.html?template=employment-contract" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="legal-doc">
+                <div class="legal-title">Power of Attorney</div>
+                <div class="legal-subtitle">IMPORTANT INFORMATION • AGENT DESIGNATION</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph med"></div>
+                <div class="legal-section-title">Designation of Agent</div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+                <div class="legal-fill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <h3>Power of Attorney</h3>
+            <p>Formal legal authorization template styled to look official, structured, and ready for proper review.</p>
+            <a href="app.html?template=power-of-attorney" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="preview-sheet">
+            <div class="sheet-inner">
+              <div class="legal-doc">
+                <div class="legal-title">Business Proposal</div>
+                <div class="legal-subtitle">OVERVIEW • SCOPE • DELIVERABLES • TERMS</div>
+                <div class="legal-section-title">Overview</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph med"></div>
+                <div class="legal-section-title">Deliverables</div>
+                <div class="legal-paragraph long"></div>
+                <div class="legal-paragraph med"></div>
+                <div class="legal-section-title">Terms</div>
+                <div class="legal-fill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="template-meta">
+            <h3>Business Proposal</h3>
+            <p>A professional proposal layout for services, scope, pricing, terms, and offer presentation.</p>
+            <a href="app.html?template=business-proposal" class="use-btn">Use Template</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="footer-note">Phase 1 template gallery is ready. Next step is wiring selected templates directly into live preview rendering.</div>
+  </div>
+
+  <script>
+    function showSection(id, btn) {
+      const sections = document.querySelectorAll('.template-section');
+      const buttons = document.querySelectorAll('.tab-button');
+
+      sections.forEach(section => section.classList.remove('active'));
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
