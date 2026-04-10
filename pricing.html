@@ -261,12 +261,15 @@ body {
 
 </div>
 </div>
+<div id="businessModal" class="modal">
+  <div class="modal-content">
+    ...all the business popup content...
+  </div>
+</div>
 
- <div class="modal-content">
 
 <h2>🎉 Your Document System is Ready</h2>
-
-<p>Your formatted documents are ready for secure, full-access use.</p>
+<p>Your formatted documents are ready for secure, full-access use through the Business Plan.</p>
 
 <p><strong>Business Plan – $129.99/month</strong></p>
 
@@ -290,5 +293,15 @@ body {
 <button class="btn secondary" onclick="closeModal()">Close</button>
 
 </div>
+
+  <script>
+function openBusinessModal() {
+  document.getElementById("businessModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("businessModal").style.display = "none";
+}
+</script>
 </body>
 </html>
