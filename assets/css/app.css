@@ -146,37 +146,15 @@
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  overflow: hidden;
-}
-
-.watermark::before {
-  content:
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW\n"
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW\n"
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW\n"
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW\n"
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW\n"
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW\n"
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW\n"
-    "FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW    FORMATFLOW PREVIEW";
-
-  position: absolute;
-  top: -35%;
-  left: -35%;
-  width: 170%;
-  height: 170%;
-
-  transform: rotate(-32deg);
-  transform-origin: center;
-
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  line-height: 2.6;
-  color: rgba(255, 255, 255, 0.28);
-
-  white-space: pre;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.22);
+  transform: rotate(-28deg);
   text-align: center;
+  white-space: nowrap;
 }
 .viewer-panel {
   display: flex;
