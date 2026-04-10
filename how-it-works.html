@@ -2,81 +2,232 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How It Works | FormatFlow</title>
 
-  <!-- LINK YOUR MAIN STYLES -->
-  <link rel="stylesheet" href="assets/css/app.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f5;
+      color: #1f2a25;
+    }
 
+    .how-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 46px;
+      color: #1f2a25;
+    }
+
+    .hero p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #5f6f66;
+    }
+
+    .section-title {
+      font-size: 34px;
+      margin: 40px 0 20px;
+      color: #1f2a25;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px 22px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(49, 77, 66, 0.08);
+    }
+
+    .step-number {
+      display: inline-block;
+      background: #c5a85a;
+      color: #1f2a25;
+      font-weight: bold;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: #1f2a25;
+    }
+
+    .info-card p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #4e5f57;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .faq-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 22px 22px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border-left: 6px solid #314d42;
+    }
+
+    .faq-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: #1f2a25;
+    }
+
+    .faq-card p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #4e5f57;
+    }
+
+    .back-row {
+      text-align: center;
+      margin-top: 34px;
+    }
+
+    .back-link {
+      display: inline-block;
+      background: #314d42;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .info-card h3,
+      .faq-card h3 {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="how-shell">
 
-    <h1>How It Works</h1>
-    <p>Create professional documents in minutes with a simple, structured process.</p>
-
-    <div class="faq-item">
-      <h3>1. Choose your document type</h3>
-      <p>Select the type of document you want to create — resume, essay, business document, legal-style document, or eBook.</p>
+    <div class="hero">
+      <h1>How It Works</h1>
+      <p>Create professional documents through a simple, guided process designed to help you move from idea to completed document with clarity and confidence.</p>
     </div>
 
-    <div class="faq-item">
-      <h3>2. Choose a template</h3>
-      <p>Select a template that matches your document style so your content is formatted correctly.</p>
+    <h2 class="section-title">How It Works</h2>
+
+    <div class="card-grid">
+
+      <div class="info-card">
+        <div class="step-number">Step 1</div>
+        <h3>Choose your document type</h3>
+        <p>Select the type of document you want to create, whether it is a resume, essay, business document, legal-style document, or eBook.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="step-number">Step 2</div>
+        <h3>Choose a template</h3>
+        <p>Select a template style that matches your document so your content is organized and formatted in the right structure.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="step-number">Step 3</div>
+        <h3>Add your content</h3>
+        <p>Upload your file, paste your text, or type directly into the editor. FormatFlow prepares your content for professional refinement.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="step-number">Step 4</div>
+        <h3>Generate and refine</h3>
+        <p>Use built-in tools to improve wording, structure, grammar, and clarity before moving forward with your completed document.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="step-number">Step 5</div>
+        <h3>Review your protected preview</h3>
+        <p>Preview your formatted document before choosing your access option. This helps you review structure, wording, and layout before checkout.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="step-number">Step 6</div>
+        <h3>Secure access and download</h3>
+        <p>Choose the access option that fits your needs, proceed through secure checkout, and receive the completed version of your document.</p>
+      </div>
+
     </div>
 
-    <div class="faq-item">
-      <h3>3. Add your content</h3>
-      <p>Upload a file, paste your text, or type directly into the editor. FormatFlow prepares your content professionally.</p>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-card">
+        <h3>What does unlimited standard use mean?</h3>
+        <p>Unlimited standard use means you can create documents as needed for normal personal or professional use without automated or abusive activity.</p>
+      </div>
+
+      <div class="faq-card">
+        <h3>Can I upload my own document?</h3>
+        <p>Yes. You can upload your existing file and have it professionally formatted, refined, or rewritten.</p>
+      </div>
+
+      <div class="faq-card">
+        <h3>Can I create legal documents?</h3>
+        <p>Yes. The Business plan is best for legal-style documents, agreements, contracts, notices, and formal business paperwork.</p>
+      </div>
+
+      <div class="faq-card">
+        <h3>Can I create eBooks and essays?</h3>
+        <p>Yes. The Unlimited plan is best for long-form writing such as essays, eBooks, repeated drafts, and consistent document creation.</p>
+      </div>
+
+      <div class="faq-card">
+        <h3>Will my final document include the preview watermark?</h3>
+        <p>No. The preview is protected for display purposes. Final accessed documents are intended to be clean and ready for use.</p>
+      </div>
+
+      <div class="faq-card">
+        <h3>Which plan should I choose?</h3>
+        <p>Single Document is best for one completed file. Starter and Pro are best for lighter recurring use. Unlimited is best for high-volume writing. Business is best for legal, contract, and client-facing workflow use.</p>
+      </div>
+
     </div>
 
-    <div class="faq-item">
-      <h3>4. Generate and refine</h3>
-      <p>Improve wording, structure, and clarity using built-in tools before finalizing your document.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>5. Preview your document</h3>
-      <p>Review your formatted document in preview mode before choosing your access option.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>6. Secure access and download</h3>
-      <p>Choose your plan and proceed through secure checkout to access your completed document.</p>
-    </div>
-
-    <hr style="margin:40px 0;">
-
-    <h2>Frequently Asked Questions</h2>
-
-    <div class="faq-item">
-      <h4>What does unlimited standard use mean?</h4>
-      <p>Unlimited standard use means you can create documents as needed for normal personal or professional use.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>Can I upload my own document?</h4>
-      <p>Yes. You can upload your file and have it professionally formatted or rewritten.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>Can I create legal documents?</h4>
-      <p>Yes. Business plans are best for contracts, agreements, and formal legal-style documents.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>Can I create eBooks and essays?</h4>
-      <p>Yes. Unlimited plans are best for long-form writing like eBooks, essays, and repeated content creation.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>Will my final document include the watermark?</h4>
-      <p>No. Final documents are clean and ready for use.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>Which plan should I choose?</h4>
-      <p>Single for one-time use, Pro for occasional use, Unlimited for high-volume writing, and Business for legal and client-facing documents.</p>
+    <div class="back-row">
+      <a href="pricing.html" class="back-link">Back to Pricing</a>
     </div>
 
   </div>
