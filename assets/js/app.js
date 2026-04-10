@@ -248,7 +248,31 @@ document.addEventListener("DOMContentLoaded", function () {
   if (fileUpload) {
     fileUpload.addEventListener("change", handleFileUpload);
   }
+const preview = document.getElementById("preview");
 
+if (preview) {
+  // Block copy
+  preview.addEventListener("copy", function (e) {
+    e.preventDefault();
+    setAssistantMessage("Preview is protected. Use secure access to download your document.");
+  });
+
+  // Block cut
+  preview.addEventListener("cut", function (e) {
+    e.preventDefault();
+  });
+
+  // Block right-click
+  preview.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+    setAssistantMessage("Preview actions are limited. Use the download option for full access.");
+  });
+
+  // Block drag selection (extra layer)
+  preview.addEventListener("mousedown", function (e) {
+    if (e.detail > 1) e.preventDefault();
+  });
+}
   setAssistantMessage(
     "Select a document type, choose a template, then upload, paste, or type your content. When ready, click Generate Document."
   );
