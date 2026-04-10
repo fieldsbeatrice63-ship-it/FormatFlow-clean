@@ -285,6 +285,14 @@
   font-size: 36px;
   margin-bottom: 10px;
 }
+/* 🔒 PREVIEW PROTECTION */
+.preview-content,
+.document-page,
+#preview {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 @media (max-width: 900px) {
   .app-shell {
     grid-template-columns: 1fr;
