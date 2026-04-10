@@ -58,7 +58,7 @@ async function generateDocument() {
 
     preview.innerHTML = `
       <div class="preview-content">${data.output}</div>
-    <div class="watermark">
+  <div class="watermark"></div>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
@@ -104,7 +104,7 @@ async function rewrite(type) {
 
     preview.innerHTML = `
       <div class="preview-content">${data.output}</div>
-    <div class="watermark">
+    <div class="watermark"></div>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
@@ -142,7 +142,7 @@ function clearSession() {
   if (preview) {
     preview.innerHTML = `
       <div class="preview-content">Your document preview will appear here...</div>
-   <div class="watermark">
+  <div class="watermark"></div>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
 FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
