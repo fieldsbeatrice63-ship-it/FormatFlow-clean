@@ -196,7 +196,7 @@ body {
 <li>All templates included</li>
 <li>Unlimited standard use</li>
 </ul>
-<a href="https://buy.stripe.com/bJeaEWdnR3kt1cE10t3ks06" class="btn primary">Go Unlimited</a>
+<button class="btn primary" onclick="openUnlimitedModal()">Go Unlimited</button>
 </div>
 
 <!-- BUSINESS -->
@@ -262,6 +262,36 @@ body {
 
 </div>
 </div>
+
+
+  <div id="unlimitedModal" class="modal">
+  <div class="modal-content">
+
+    <h2>🎉 Your Document System is Ready</h2>
+
+    <p>Your formatted documents are ready for secure, full-access use through the Unlimited Plan.</p>
+
+    <p><strong>Unlimited Plan – $69.99/month</strong></p>
+
+    <ul>
+      <li>Unlimited document generation</li>
+      <li>Full access to standard document categories</li>
+      <li>Full access to all templates</li>
+      <li>Access to Template Library</li>
+      <li>Best for eBooks, essays, resumes, and content creation</li>
+      <li>High-volume document creation</li>
+      <li>Upload and rewrite tools</li>
+      <li>Designed for consistent personal and professional use</li>
+    </ul>
+
+    <p>This plan is ideal for creators, writers, students, and professionals who need flexibility and frequent document generation.</p>
+
+    <a href="https://buy.stripe.com/bJeaEWdnR3kt1cE10t3ks06" class="btn primary">Continue to Secure Checkout</a>
+
+    <button class="btn secondary" onclick="closeUnlimitedModal()">Close</button>
+
+  </div>
+</div>
 <div id="businessModal" class="modal">
   <div class="modal-content">
 
@@ -293,7 +323,16 @@ body {
   </div>
 </div>
 
-  <script>
+ <script>
+function openUnlimitedModal() {
+  document.getElementById("unlimitedModal").style.display = "flex";
+}
+
+function closeUnlimitedModal() {
+  document.getElementById("unlimitedModal").style.display = "none";
+}
+
+  
 function openBusinessModal() {
   document.getElementById("businessModal").style.display = "flex";
 }
