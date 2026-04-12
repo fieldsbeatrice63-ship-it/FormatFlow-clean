@@ -125,7 +125,7 @@ function clearSession() {
   const docType = document.getElementById("docType");
   const template = document.getElementById("templateSelect");
   const input = document.getElementById("userInput");
-  const preview = document.getElementById("preview");
+ const preview = document.getElementById("outputPreview");
   const fileUpload = document.getElementById("fileUpload");
   const modeLabel = document.getElementById("previewModeLabel");
   const pageIndicator = document.getElementById("pageIndicator");
@@ -166,7 +166,7 @@ function escapeHtml(text) {
 }
 
 function applyZoom() {
-  const preview = document.getElementById("preview");
+  const preview = document.getElementById("outputPreview");
   if (!preview) return;
   preview.style.transform = `scale(${currentZoom})`;
   preview.style.transformOrigin = "top center";
@@ -282,7 +282,7 @@ if (preview) {
 
 function getTemplateFromURL() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("template");
+  return params.get("template") || localStorage.getItem("selectedTemplate");
 }
 
 function loadSelectedTemplate() {
@@ -338,6 +338,10 @@ const outputBox = document.getElementById("outputBox");
       </div>
     `;
   }
+if (outputBox) {
+  outputBox.value = preview.textContent.trim();
+}
+localStorage.removeItem("selectedTemplate");  
 }
 
 
