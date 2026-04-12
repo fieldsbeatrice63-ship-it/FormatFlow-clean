@@ -4,6 +4,11 @@ let currentPage = 1;
 let totalPages = 1;
 
 function selectTemplate(template) {
+  if (template === "template-library") {
+    window.location.href = "templates.html";
+    return;
+  }
+
   currentTemplate = template || "";
 }
 
