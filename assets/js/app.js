@@ -75,7 +75,8 @@ FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
 }
 
 async function rewrite(type) {
-  const preview = document.getElementById("preview");
+ const preview = document.getElementById("outputPreview");
+const outputBox = document.getElementById("outputBox");
 
   if (!preview) return;
 
