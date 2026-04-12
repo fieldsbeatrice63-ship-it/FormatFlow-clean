@@ -303,12 +303,17 @@ function loadSelectedTemplate() {
   if (!template) return;
 
   const preview = document.getElementById("outputPreview");
-const outputBox = document.getElementById("outputBox");
-const templateSelect = document.getElementById("templateSelect");
+  const outputBox = document.getElementById("outputBox");
+  const templateSelect = document.getElementById("templateSelect");
+
   if (!preview) return;
-if (templateSelect) {
-  templateSelect.value = template;
-}
+
+  if (templateSelect) {
+    templateSelect.value = template;
+  }
+
+  currentTemplate = template;
+
   if (template === "classic-professional") {
     preview.innerHTML = `
       <div style="padding:40px; font-family:Arial;">
@@ -353,14 +358,12 @@ if (templateSelect) {
     `;
   }
 
+  if (outputBox) {
+    outputBox.value = preview.textContent.trim();
   }
 
-if (outputBox) {
-  outputBox.value = preview.textContent.trim();
+  localStorage.removeItem("selectedTemplate");
 }
-localStorage.removeItem("selectedTemplate");  
-}
-
 
 
 // run when page loads
