@@ -290,7 +290,8 @@ function loadSelectedTemplate() {
 
   if (!template) return;
 
-  const preview = document.getElementById("preview");
+  const preview = document.getElementById("outputPreview");
+const outputBox = document.getElementById("outputBox");
 
   if (!preview) return;
 
@@ -338,6 +339,8 @@ function loadSelectedTemplate() {
     `;
   }
 }
+
+
 
 // run when page loads
 document.addEventListener("DOMContentLoaded", loadSelectedTemplate);
