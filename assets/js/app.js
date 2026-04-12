@@ -292,9 +292,11 @@ function loadSelectedTemplate() {
 
   const preview = document.getElementById("outputPreview");
 const outputBox = document.getElementById("outputBox");
-
+const templateSelect = document.getElementById("templateSelect");
   if (!preview) return;
-
+if (templateSelect) {
+  templateSelect.value = template;
+}
   if (template === "classic-professional") {
     preview.innerHTML = `
       <div style="padding:40px; font-family:Arial;">
@@ -338,6 +340,9 @@ const outputBox = document.getElementById("outputBox");
       </div>
     `;
   }
+
+  }
+
 if (outputBox) {
   outputBox.value = preview.textContent.trim();
 }
