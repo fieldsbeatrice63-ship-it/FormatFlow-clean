@@ -252,35 +252,40 @@ function exportDOCX() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const fileUpload = document.getElementById("fileUpload");
+  const templateSelect = document.getElementById("templateSelect");
+  const preview = document.getElementById("outputPreview");
 
   if (fileUpload) {
     fileUpload.addEventListener("change", handleFileUpload);
   }
-const preview = document.getElementById("outputPreview");
 
-if (preview) {
-  // Block copy
-  preview.addEventListener("copy", function (e) {
-    e.preventDefault();
-    setAssistantMessage("Preview is protected. Use secure access to download your document.");
-  });
+  if (templateSelect && !templateSelect.querySelector('option[value="template-library"]')) {
+    const opt = document.createElement("option");
+    opt.value = "template-library";
+    opt.textContent = "Choose From Template Library";
+    templateSelect.insertBefore(opt, templateSelect.options[1]);
+  }
 
-  // Block cut
-  preview.addEventListener("cut", function (e) {
-    e.preventDefault();
-  });
+  if (preview) {
+    preview.addEventListener("copy", function (e) {
+      e.preventDefault();
+      setAssistantMessage("Preview is protected. Use secure access to download your document.");
+    });
 
-  // Block right-click
-  preview.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-    setAssistantMessage("Preview actions are limited. Use the download option for full access.");
-  });
+    preview.addEventListener("cut", function (e) {
+      e.preventDefault();
+    });
 
-  // Block drag selection (extra layer)
-  preview.addEventListener("mousedown", function (e) {
-    if (e.detail > 1) e.preventDefault();
-  });
-}
+    preview.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+      setAssistantMessage("Preview actions are limited. Use the download option for full access.");
+    });
+
+    preview.addEventListener("mousedown", function (e) {
+      if (e.detail > 1) e.preventDefault();
+    });
+  }
+
   setAssistantMessage(
     "Select a document type, choose a template, then upload, paste, or type your content. When ready, click Generate Document."
   );
