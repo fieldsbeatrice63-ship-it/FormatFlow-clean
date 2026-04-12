@@ -18,7 +18,7 @@ async function generateDocument() {
   const docTypeEl = document.getElementById("docType");
   const templateEl = document.getElementById("templateSelect");
   const input = document.getElementById("userInput");
-  const preview = document.getElementById("preview");
+ const preview = document.getElementById("outputPreview");
 
   const docType = docTypeEl ? docTypeEl.value : "";
   const template = templateEl ? templateEl.value : "";
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (fileUpload) {
     fileUpload.addEventListener("change", handleFileUpload);
   }
-const preview = document.getElementById("preview");
+const preview = document.getElementById("outputPreview");
 
 if (preview) {
   // Block copy
