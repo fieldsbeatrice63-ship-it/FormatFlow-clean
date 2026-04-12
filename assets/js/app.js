@@ -21,7 +21,9 @@ async function generateDocument() {
  const preview = document.getElementById("outputPreview");
 
   const docType = docTypeEl ? docTypeEl.value : "";
-  const template = templateEl ? templateEl.value : "";
+ const template = (templateEl && templateEl.value)
+  ? templateEl.value
+  : (currentTemplate || getTemplateFromURL() || localStorage.getItem("selectedTemplate") || "");
   const text = input ? input.value.trim() : "";
 
   if (!docType) {
