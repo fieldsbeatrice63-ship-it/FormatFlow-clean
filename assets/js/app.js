@@ -92,7 +92,7 @@ function updateTemplateOptions(category) {
   if (!templateSelect) return;
 
   const options = {
-    resume: [
+ resume: [
   { value: "resume-classic", label: "Resume Classic" },
   { value: "resume-modern", label: "Resume Modern" },
   { value: "resume-executive", label: "Executive Resume" },
