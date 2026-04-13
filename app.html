@@ -48,19 +48,23 @@
   </select>
 </div>
 
-   <div class="panel-block">
-  <label for="templateSelect">Choose Template</label>
-  <select id="templateSelect" onchange="selectTemplate(this.value)">
-    <option value="">Select Template</option>
-    <option value="template-library">Choose From Template Library</option>
-    <option value="resume-classic">Resume Classic</option>
-    <option value="resume-modern">Resume Modern</option>
-    <option value="business-formal">Business Formal</option>
-    <option value="legal-standard">Legal Standard</option>
-    <option value="ebook-clean">eBook Clean</option>
-    <option value="essay-standard">Essay Standard</option>
-  <option value="general-professional">General Professional</option>
+  <div class="panel-block">
+  <label for="templateCategory">Choose Template Category</label>
+  <select id="templateCategory" onchange="updateTemplateOptions(this.value)">
+    <option value="">Select Template Category</option>
+    <option value="resume">Resume</option>
+    <option value="essay">Essay</option>
+    <option value="ebook">E-Book</option>
+    <option value="legal">Legal Document</option>
+    <option value="business">Business Document</option>
+    <option value="other">Other Professional Document</option>
+  </select>
+</div>
 
+<div class="panel-block">
+  <label for="templateSelect">Choose Template Style</label>
+  <select id="templateSelect" onchange="selectTemplate(this.value)">
+    <option value="">Select Template Style</option>
   </select>
 </div>
    
