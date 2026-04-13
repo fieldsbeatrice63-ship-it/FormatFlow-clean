@@ -608,17 +608,35 @@ if (template === "resume-classic") {
 document.addEventListener("DOMContentLoaded", loadSelectedTemplate);
 function renderTemplatePreview(template, content = "") {
   const safeContent = content || "";
+const resumeData = parseResumeSections(content);
+if (template === "resume-classic") {
+  return `
+    <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
+      <h1 style="margin:0 0 8px; color:#111;">${resumeData.name}</h1>
+      <p style="margin:0 0 18px; color:#555;">${resumeData.contact}</p>
 
-  if (template === "resume-classic") {
-    return `
-      <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
-        <h1 style="margin:0 0 8px; color:#111;">Your Name</h1>
-        <p style="margin:0 0 18px; color:#555;">City, State • Email • Phone</p>
-        <h3 style="margin:0 0 8px; color:#111;">Professional Summary</h3>
-        <div style="margin:0 0 18px; color:#444; line-height:1.7;">${safeContent}</div>
+      <h3 style="margin:0 0 8px; color:#111;">Professional Summary</h3>
+      <div style="margin:0 0 18px; color:#444; line-height:1.7;">
+        ${resumeData.summary || "Your summary will appear here..."}
       </div>
-    `;
-  }
+
+      <h3 style="margin:0 0 8px; color:#111;">Skills</h3>
+      <div style="margin:0 0 18px; color:#444; line-height:1.7;">
+        ${resumeData.skills || "Your skills will appear here..."}
+      </div>
+
+      <h3 style="margin:0 0 8px; color:#111;">Experience</h3>
+      <div style="margin:0 0 18px; color:#444; line-height:1.7;">
+        ${resumeData.experience || "Your experience will appear here..."}
+      </div>
+
+      <h3 style="margin:0 0 8px; color:#111;">Education</h3>
+      <div style="margin:0; color:#444; line-height:1.7;">
+        ${resumeData.education || "Your education will appear here..."}
+      </div>
+    </div>
+  `;
+}
 
   if (template === "resume-modern") {
     return `
