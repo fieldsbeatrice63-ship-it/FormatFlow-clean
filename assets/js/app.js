@@ -613,3 +613,140 @@ if (template === "resume-classic") {
 
 // run when page loads
 document.addEventListener("DOMContentLoaded", loadSelectedTemplate);
+function renderTemplatePreview(template, content = "") {
+  const safeContent = content || "";
+
+  if (template === "resume-classic") {
+    return `
+      <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
+        <h1 style="margin:0 0 8px; color:#111;">Your Name</h1>
+        <p style="margin:0 0 18px; color:#555;">City, State • Email • Phone</p>
+        <h3 style="margin:0 0 8px; color:#111;">Professional Summary</h3>
+        <div style="margin:0 0 18px; color:#444; line-height:1.7;">${safeContent}</div>
+      </div>
+    `;
+  }
+
+  if (template === "resume-modern") {
+    return `
+      <div style="display:flex; min-height:100%; background:#fff;">
+        <div style="width:28%; background:#19a2b8; color:#fff; padding:22px;">
+          <h2 style="margin:0 0 14px;">Your Name</h2>
+          <p style="margin:0 0 10px;">Skills</p>
+          <p style="margin:0;">Communication • Leadership • Service</p>
+        </div>
+        <div style="flex:1; padding:30px;">
+          <h3 style="margin:0 0 8px;">Professional Summary</h3>
+          <div style="margin:0; line-height:1.7;">${safeContent}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (template === "resume-executive") {
+    return `
+      <div style="padding:0; background:#fff; min-height:100%; font-family:Arial;">
+        <div style="background:#173b79; color:#fff; padding:24px 34px;">
+          <h1 style="margin:0 0 6px;">Your Name</h1>
+          <p style="margin:0;">Executive Resume • Email • Phone • Location</p>
+        </div>
+        <div style="padding:34px;">
+          <h3 style="margin:0 0 8px; color:#173b79;">Executive Profile</h3>
+          <div style="margin:0; color:#444; line-height:1.7;">${safeContent}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (template === "resume-dark-header") {
+    return `
+      <div style="padding:0; background:#fff; min-height:100%; font-family:Arial;">
+        <div style="background:#111827; color:#fff; padding:22px 34px;">
+          <h1 style="margin:0 0 6px;">Your Name</h1>
+          <p style="margin:0;">Professional Resume • Email • Phone</p>
+        </div>
+        <div style="padding:34px;">
+          <h3 style="margin:0 0 8px; color:#111827;">Summary</h3>
+          <div style="margin:0; color:#444; line-height:1.7;">${safeContent}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (template === "resume-gold-accent") {
+    return `
+      <div style="padding:0; background:#fff; min-height:100%; font-family:Arial;">
+        <div style="height:16px; background:#d4af37;"></div>
+        <div style="padding:30px 34px 10px;">
+          <h1 style="margin:0 0 6px; color:#111;">Your Name</h1>
+          <p style="margin:0 0 18px; color:#777;">Email • Phone • Location</p>
+          <h3 style="margin:0 0 8px; color:#b3871e;">Professional Summary</h3>
+          <div style="margin:0; color:#444; line-height:1.7;">${safeContent}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (template === "resume-ats") {
+    return `
+      <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
+        <h1 style="margin:0 0 8px; color:#111;">Your Name</h1>
+        <p style="margin:0 0 18px; color:#555;">Email | Phone | Location</p>
+        <hr style="border:none; border-top:1px solid #ccc; margin:0 0 18px;">
+        <h3 style="margin:0 0 8px; color:#111;">Summary</h3>
+        <div style="margin:0; color:#444; line-height:1.7;">${safeContent}</div>
+      </div>
+    `;
+  }
+
+  if (template === "essay-standard") {
+    return `
+      <div style="padding:40px; font-family:Georgia;">
+        <h2 style="text-align:center;">Essay Title</h2>
+        <div style="line-height:1.8;">${safeContent}</div>
+      </div>
+    `;
+  }
+
+  if (template === "ebook-clean") {
+    return `
+      <div style="padding:40px; font-family:Georgia;">
+        <h2>eBook Title</h2>
+        <div style="line-height:1.8;">${safeContent}</div>
+      </div>
+    `;
+  }
+
+  if (template === "legal-standard") {
+    return `
+      <div style="padding:40px; font-family:Georgia;">
+        <h2 style="text-align:center;">Legal Document</h2>
+        <div style="line-height:1.8;">${safeContent}</div>
+      </div>
+    `;
+  }
+
+  if (template === "business-formal") {
+    return `
+      <div style="padding:40px;">
+        <h2>Business Document</h2>
+        <div style="line-height:1.8;">${safeContent}</div>
+      </div>
+    `;
+  }
+
+  if (template === "general-professional") {
+    return `
+      <div style="padding:40px;">
+        <h2>Professional Document</h2>
+        <div style="line-height:1.8;">${safeContent}</div>
+      </div>
+    `;
+  }
+
+  return `
+    <div style="padding:40px; background:#fff; min-height:100%;">
+      <div style="line-height:1.8;">${safeContent}</div>
+    </div>
+  `;
+}
