@@ -28,12 +28,12 @@ function selectTemplate(template) {
 
   if (template === "resume-modern") {
     preview.innerHTML = `
-      <div style="display:flex; height:100%;">
-        <div style="width:30%; background:#19a2b8; color:#fff; padding:20px;">
-          <h2>Your Name</h2>
+      <div style="display:flex; min-height:100%;">
+        <div style="width:28%; background:#19a2b8; color:#fff; padding:20px;">
+          <h2 style="margin-top:0;">Your Name</h2>
           <p>Skills</p>
         </div>
-        <div style="padding:30px;">
+        <div style="flex:1; padding:30px;">
           <h3>Experience</h3>
           <p>Content will populate here...</p>
         </div>
