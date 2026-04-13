@@ -743,3 +743,78 @@ function renderTemplatePreview(template, content = "") {
     </div>
   `;
 }
+function parseResumeSections(content = "") {
+  const text = String(content || "").trim();
+
+  const result = {
+    name: "Your Name",
+    contact: "City, State • Email • Phone",
+    summary: "",
+    skills: "",
+    experience: "",
+    education: ""
+  };
+
+  if (!text) return result;
+
+  const lines = text
+    .replace(/\r/g, "")
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean);
+
+  if (lines.length > 0) {
+    const firstLine = lines[0];
+    if (
+      firstLine.length <= 60 &&
+      !/summary|experience|education|skills|phone|email/i.test(firstLine)
+    ) {
+      result.name = firstLine;
+      lines.shift();
+    }
+  }
+
+  if (lines.length > 0) {
+    const contactLine = lines[0];
+    if (/phone|email|linkedin|\||•|city|state|address/i.test(contactLine)) {
+      result.contact = contactLine;
+      lines.shift();
+    }
+  }
+
+  const fullText = lines.join("\n");
+
+  function extractSection(labelPatterns, stopPatterns) {
+    const startRegex = new RegExp(`(${labelPatterns})\\s*:?(.*?)((?=${stopPatterns})|$)`, "is");
+    const match = fullText.match(startRegex);
+    return match ? match[2].trim() : "";
+  }
+
+  const stopAll = "summary|professional summary|skills|core competencies|experience|professional experience|work history|education|certifications|references";
+
+  result.summary = extractSection(
+    "summary|professional summary|profile",
+    stopAll
+  );
+
+  result.skills = extractSection(
+    "skills|core competencies|areas of expertise",
+    stopAll
+  );
+
+  result.experience = extractSection(
+    "experience|professional experience|work history|employment history",
+    stopAll
+  );
+
+  result.education = extractSection(
+    "education|certifications|academic background",
+    stopAll
+  );
+
+  if (!result.summary) {
+    result.summary = fullText.slice(0, 700).trim();
+  }
+
+  return result;
+}
