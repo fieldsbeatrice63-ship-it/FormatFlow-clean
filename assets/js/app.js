@@ -345,6 +345,7 @@ function closeUnlockModal() {
 
 async function exportPDF() {
   const preview = document.getElementById("outputPreview");
+
   if (!preview) {
     setAssistantMessage("No document to export.");
     return;
@@ -354,44 +355,30 @@ async function exportPDF() {
     const { jsPDF } = window.jspdf;
 
     const pdf = new jsPDF("p", "pt", "letter");
-    const pageWidth = 612;
-    const pageHeight = 792;
 
-    const margin = 20;
+    const margin = 40;
+    const pageWidth = 612;
     const usableWidth = pageWidth - margin * 2;
 
-    const canvas = await html2canvas(preview, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: "#ffffff",
-      scrollY: -window.scrollY
-    });
+    // 🔑 Extract CLEAN TEXT (not image)
+    const text = preview.innerText || preview.textContent || "";
 
-    const imgData = canvas.toDataURL("image/png");
+    // 🔑 Split into lines that fit page width
+    const lines = pdf.splitTextToSize(text, usableWidth);
 
-    const imgWidth = usableWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let y = 60;
+    const lineHeight = 16;
+    const pageHeight = 792 - 60;
 
-    let position = 0;
-    let remainingHeight = imgHeight;
-
-    while (remainingHeight > 0) {
-      pdf.addImage(
-        imgData,
-        "PNG",
-        margin,
-        position,
-        imgWidth,
-        imgHeight
-      );
-
-      remainingHeight -= pageHeight;
-
-      if (remainingHeight > 0) {
+    lines.forEach((line, index) => {
+      if (y > pageHeight) {
         pdf.addPage();
-        position = position - pageHeight;
+        y = 60;
       }
-    }
+
+      pdf.text(line, margin, y);
+      y += lineHeight;
+    });
 
     pdf.save("formatflow-document.pdf");
 
