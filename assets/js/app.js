@@ -308,11 +308,20 @@ function loadSelectedTemplate() {
 
   if (!preview) return;
 
-  if (templateSelect) {
-    templateSelect.value = template;
-  }
+ const templateMap = {
+  "classic-professional": "resume-classic",
+  "modern-sidebar": "resume-modern",
+  "business-proposal": "business-formal",
+  "lease-agreement": "legal-standard"
+};
 
-  currentTemplate = template;
+const resolvedTemplate = templateMap[template] || template;
+
+if (templateSelect) {
+  templateSelect.value = resolvedTemplate;
+}
+
+currentTemplate = resolvedTemplate;
 
   if (template === "classic-professional") {
     preview.innerHTML = `
