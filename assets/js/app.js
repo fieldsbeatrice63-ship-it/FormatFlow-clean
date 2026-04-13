@@ -176,58 +176,39 @@ function updateTemplateOptions(category) {
   if (!templateSelect) return;
 
   const options = {
- resume: [
-  { value: "resume-classic", label: "Resume Classic" },
-  { value: "resume-modern", label: "Resume Modern" },
-  { value: "resume-executive", label: "Executive Resume" },
-  { value: "resume-dark-header", label: "Dark Header Resume" },
-  { value: "resume-gold-accent", label: "Gold Accent Resume" },
-  { value: "resume-ats", label: "ATS Resume" }
-],
+    resume: [
+      { value: "resume-classic", label: "Standard Resume" }
+    ],
     essay: [
-      { value: "essay-standard", label: "Essay Standard" },
-      { value: "essay-blue-header", label: "Essay Blue Header" },
-      { value: "essay-clean-margin", label: "Essay Clean Margin" },
-      { value: "essay-formal-accent", label: "Essay Formal Accent" },
-      { value: "essay-research", label: "Essay Research" },
-      { value: "essay-strong-header", label: "Essay Strong Header" }
+      { value: "essay-standard", label: "Standard Essay" }
     ],
     ebook: [
-      { value: "ebook-clean", label: "eBook Clean" },
-      { value: "ebook-bold-header", label: "eBook Bold Header" },
-      { value: "ebook-premium", label: "eBook Premium" },
-      { value: "ebook-minimal", label: "eBook Minimal" },
-      { value: "ebook-guide-format", label: "eBook Guide Format" },
-      { value: "ebook-sidebar", label: "eBook Sidebar" }
+      { value: "ebook-clean", label: "Standard eBook" }
     ],
     legal: [
-      { value: "legal-standard", label: "Legal Standard" },
-      { value: "lease-agreement", label: "Lease Agreement" },
-      { value: "notice-format", label: "Notice Format" },
-      { value: "agreement-clean", label: "Agreement Clean" },
-      { value: "formal-petition", label: "Formal Petition" },
-      { value: "legal-letter", label: "Legal Letter" }
+      { value: "legal-3-day-notice", label: "3-Day Notice" },
+      { value: "legal-lease-agreement", label: "Lease Agreement" },
+      { value: "legal-demand-letter", label: "Demand Letter" },
+      { value: "legal-complaint-letter", label: "Complaint Letter" },
+      { value: "legal-eviction-notice", label: "Eviction Notice" },
+      { value: "legal-standard", label: "General Legal Document" }
     ],
     business: [
-      { value: "business-formal", label: "Business Formal" },
       { value: "business-proposal", label: "Business Proposal" },
-      { value: "business-premium", label: "Business Premium" },
-      { value: "business-letter", label: "Business Letter" },
-      { value: "business-sidebar", label: "Business Sidebar" },
-      { value: "scope-terms", label: "Scope & Terms" }
+      { value: "business-letter", label: "Formal Business Letter" },
+      { value: "business-invoice-request", label: "Invoice Request" },
+      { value: "business-scope-of-work", label: "Scope of Work" },
+      { value: "business-partnership-letter", label: "Partnership Letter" },
+      { value: "business-formal", label: "General Business Document" }
     ],
     other: [
-      { value: "general-professional", label: "General Professional" },
-      { value: "formal-request", label: "Formal Request" },
-      { value: "statement-format", label: "Statement Format" },
-      { value: "reference-letter", label: "Reference Letter" },
-      { value: "complaint-letter", label: "Complaint Letter" },
-      { value: "professional-memo", label: "Professional Memo" }
+      { value: "general-professional", label: "General Professional Document" }
     ]
   };
 
-  templateSelect.innerHTML = `<option value="">Select Template Style</option>`;
-currentTemplate = "";
+  templateSelect.innerHTML = `<option value="">Select Subtype Detail</option>`;
+  currentTemplate = "";
+
   if (!category || !options[category]) return;
 
   options[category].forEach(function (item) {
