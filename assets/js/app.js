@@ -93,13 +93,13 @@ function updateTemplateOptions(category) {
 
   const options = {
     resume: [
-      { value: "resume-classic", label: "Classic Resume" },
-      { value: "resume-modern", label: "Modern Sidebar" },
-      { value: "executive-resume", label: "Executive Resume" },
-      { value: "dark-header-resume", label: "Dark Header Resume" },
-      { value: "gold-accent-resume", label: "Gold Accent Resume" },
-      { value: "ats-resume", label: "ATS Resume" }
-    ],
+  { value: "resume-classic", label: "Resume Classic" },
+  { value: "resume-modern", label: "Resume Modern" },
+  { value: "resume-executive", label: "Executive Resume" },
+  { value: "resume-dark-header", label: "Dark Header Resume" },
+  { value: "resume-gold-accent", label: "Gold Accent Resume" },
+  { value: "resume-ats", label: "ATS Resume" }
+],
     essay: [
       { value: "essay-standard", label: "Essay Standard" },
       { value: "essay-blue-header", label: "Essay Blue Header" },
