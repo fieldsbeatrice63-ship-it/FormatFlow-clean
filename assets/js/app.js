@@ -139,23 +139,46 @@ async function generateDocument() {
 
   try {
     const response = await fetch("https://format-flow-backend.onrender.com/api/generate-document", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-  content: text,
-  docType,
-  template
-})
-    });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    content: text,
+    docType,
+    template
+  })
+});
 
-    const data = await response.json();
+const data = await response.json();
 
-   preview.innerHTML = renderTemplatePreview(template, data.output);
+let finalOutput = data.output || "";
 
-    setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
-    applyZoom();
+if (
+  docType === "legal" ||
+  docType === "business" ||
+  docType === "cover-letter" ||
+  docType === "resignation-letter"
+) {
+  const rewriteResponse = await fetch("https://format-flow-backend.onrender.com/api/rewrite-document", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      content: finalOutput,
+      type: "professional"
+    })
+  });
+
+  const rewriteData = await rewriteResponse.json();
+  finalOutput = rewriteData.output || finalOutput;
+}
+
+preview.innerHTML = renderTemplatePreview(template, finalOutput);
+
+setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
+applyZoom();
 
   } catch (error) {
     console.error(error);
