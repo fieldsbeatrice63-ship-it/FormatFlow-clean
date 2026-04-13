@@ -346,52 +346,61 @@ function closeUnlockModal() {
 async function exportPDF() {
   const preview = document.getElementById("outputPreview");
   if (!preview) {
-    setAssistantMessage("There is no document available to export yet.");
+    setAssistantMessage("No document to export.");
     return;
   }
 
   try {
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF("p", "pt", "letter");
+    const pageWidth = 612;
+    const pageHeight = 792;
+
+    const margin = 20;
+    const usableWidth = pageWidth - margin * 2;
+
     const canvas = await html2canvas(preview, {
       scale: 2,
       useCORS: true,
-      backgroundColor: "#ffffff"
+      backgroundColor: "#ffffff",
+      scrollY: -window.scrollY
     });
 
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("p", "pt", "letter");
-
-    const pageWidth = 612;
-    const pageHeight = 792;
-    const margin = 24;
-    const usableWidth = pageWidth - margin * 2;
-    const usableHeight = pageHeight - margin * 2;
+    const imgData = canvas.toDataURL("image/png");
 
     const imgWidth = usableWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    const imgData = canvas.toDataURL("image/png");
+    let position = 0;
+    let remainingHeight = imgHeight;
 
-    let heightLeft = imgHeight;
-    let position = margin;
+    while (remainingHeight > 0) {
+      pdf.addImage(
+        imgData,
+        "PNG",
+        margin,
+        position,
+        imgWidth,
+        imgHeight
+      );
 
-    pdf.addImage(imgData, "PNG", margin, position, imgWidth, imgHeight);
-    heightLeft -= usableHeight;
+      remainingHeight -= pageHeight;
 
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight + margin;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", margin, position, imgWidth, imgHeight);
-      heightLeft -= usableHeight;
+      if (remainingHeight > 0) {
+        pdf.addPage();
+        position = position - pageHeight;
+      }
     }
 
     pdf.save("formatflow-document.pdf");
-    setAssistantMessage("Your PDF has been exported successfully.");
-  } catch (error) {
-    console.error(error);
-    setAssistantMessage("There was a problem exporting your PDF.");
+
+    setAssistantMessage("PDF exported successfully.");
+  } catch (err) {
+    console.error(err);
+    setAssistantMessage("PDF export failed.");
   }
 }
-
 function exportDOCX() {
   openUnlockModal(
     "Your editable document is ready for secure access. You may unlock this completed document for $5.99 per document, or review the available plans for continued use.",
