@@ -289,14 +289,7 @@ async function generateDocument() {
 
     const data = await response.json();
 
-    preview.innerHTML = `
-      <div class="preview-content">${data.output}</div>
-  <div class="watermark">FORMATFLOW PREVIEW</div>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
-</div>
-    `;
+   preview.innerHTML = renderTemplatePreview(template, data.output);
 
     setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
     applyZoom();
