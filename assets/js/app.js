@@ -10,6 +10,81 @@ function selectTemplate(template) {
   }
 
   currentTemplate = template || "";
+
+  const preview = document.getElementById("outputPreview");
+  if (!preview || !template) return;
+
+  if (template === "resume-classic") {
+    preview.innerHTML = `
+      <div style="padding:40px; font-family:Arial;">
+        <h1>Your Name</h1>
+        <h3>Professional Summary</h3>
+        <p>Your summary will appear here...</p>
+        <h3>Experience</h3>
+        <p>Your experience will appear here...</p>
+      </div>
+    `;
+  }
+
+  if (template === "resume-modern") {
+    preview.innerHTML = `
+      <div style="display:flex; height:100%;">
+        <div style="width:30%; background:#19a2b8; color:#fff; padding:20px;">
+          <h2>Your Name</h2>
+          <p>Skills</p>
+        </div>
+        <div style="padding:30px;">
+          <h3>Experience</h3>
+          <p>Content will populate here...</p>
+        </div>
+      </div>
+    `;
+  }
+
+  if (template === "essay-standard") {
+    preview.innerHTML = `
+      <div style="padding:40px; font-family:Georgia;">
+        <h2 style="text-align:center;">Essay Title</h2>
+        <p>Your essay content will appear here...</p>
+      </div>
+    `;
+  }
+
+  if (template === "ebook-clean") {
+    preview.innerHTML = `
+      <div style="padding:40px; font-family:Georgia;">
+        <h2>eBook Title</h2>
+        <p>Chapter content will appear here...</p>
+      </div>
+    `;
+  }
+
+  if (template === "legal-standard") {
+    preview.innerHTML = `
+      <div style="padding:40px; font-family:Georgia;">
+        <h2 style="text-align:center;">Legal Document</h2>
+        <p>Formal legal-style content will appear here...</p>
+      </div>
+    `;
+  }
+
+  if (template === "business-formal") {
+    preview.innerHTML = `
+      <div style="padding:40px;">
+        <h2>Business Document</h2>
+        <p>Business content will appear here...</p>
+      </div>
+    `;
+  }
+
+  if (template === "general-professional") {
+    preview.innerHTML = `
+      <div style="padding:40px;">
+        <h2>Professional Document</h2>
+        <p>Your professional content will appear here...</p>
+      </div>
+    `;
+  }
 }
 
 function updateTemplateOptions(category) {
@@ -68,7 +143,7 @@ function updateTemplateOptions(category) {
   };
 
   templateSelect.innerHTML = `<option value="">Select Template Style</option>`;
-
+currentTemplate = "";
   if (!category || !options[category]) return;
 
   options[category].forEach(function (item) {
