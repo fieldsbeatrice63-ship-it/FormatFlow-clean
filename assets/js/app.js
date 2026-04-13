@@ -4,170 +4,52 @@ let currentPage = 1;
 let totalPages = 1;
 
 function selectTemplate(template) {
-  if (template === "template-library") {
-    window.location.href = "templates.html";
-    return;
-  }
-
   currentTemplate = template || "";
 
   const preview = document.getElementById("outputPreview");
   if (!preview || !template) return;
 
   if (template === "resume-classic") {
-    preview.innerHTML = `
-      <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
-        <h1 style="margin:0 0 8px; color:#111;">Your Name</h1>
-        <p style="margin:0 0 18px; color:#555;">City, State • Email • Phone</p>
-        <h3 style="margin:0 0 8px; color:#111;">Professional Summary</h3>
-        <p style="margin:0 0 18px; color:#444;">Your summary will appear here...</p>
-        <h3 style="margin:0 0 8px; color:#111;">Experience</h3>
-        <p style="margin:0 0 18px; color:#444;">Your experience will appear here...</p>
-        <h3 style="margin:0 0 8px; color:#111;">Education</h3>
-        <p style="margin:0; color:#444;">Your education will appear here...</p>
-      </div>
-    `;
-  }
-
-  if (template === "resume-modern") {
-    preview.innerHTML = `
-      <div style="display:flex; min-height:100%; background:#fff;">
-        <div style="width:28%; background:#19a2b8; color:#fff; padding:22px;">
-          <h2 style="margin:0 0 14px;">Your Name</h2>
-          <p style="margin:0 0 18px;">Skills</p>
-          <p style="margin:0 0 10px;">• Communication</p>
-          <p style="margin:0 0 10px;">• Leadership</p>
-          <p style="margin:0;">• Organization</p>
-        </div>
-        <div style="flex:1; padding:30px;">
-          <h3 style="margin:0 0 8px;">Professional Summary</h3>
-          <p style="margin:0 0 18px;">Content will populate here...</p>
-          <h3 style="margin:0 0 8px;">Experience</h3>
-          <p style="margin:0 0 18px;">Experience will appear here...</p>
-          <h3 style="margin:0 0 8px;">Education</h3>
-          <p style="margin:0;">Education will appear here...</p>
-        </div>
-      </div>
-    `;
-  }
-
-  if (template === "resume-executive") {
-    preview.innerHTML = `
-      <div style="padding:0; background:#fff; min-height:100%; font-family:Arial;">
-        <div style="background:#173b79; color:#fff; padding:24px 34px;">
-          <h1 style="margin:0 0 6px;">Your Name</h1>
-          <p style="margin:0;">Executive Resume • Email • Phone • Location</p>
-        </div>
-        <div style="padding:34px;">
-          <h3 style="margin:0 0 8px; color:#173b79;">Executive Profile</h3>
-          <p style="margin:0 0 18px; color:#444;">High-level summary will appear here...</p>
-          <h3 style="margin:0 0 8px; color:#173b79;">Leadership Experience</h3>
-          <p style="margin:0 0 18px; color:#444;">Leadership experience will appear here...</p>
-          <h3 style="margin:0 0 8px; color:#173b79;">Education</h3>
-          <p style="margin:0; color:#444;">Education will appear here...</p>
-        </div>
-      </div>
-    `;
-  }
-
-  if (template === "resume-dark-header") {
-    preview.innerHTML = `
-      <div style="padding:0; background:#fff; min-height:100%; font-family:Arial;">
-        <div style="background:#111827; color:#fff; padding:22px 34px;">
-          <h1 style="margin:0 0 6px;">Your Name</h1>
-          <p style="margin:0;">Professional Resume • Email • Phone</p>
-        </div>
-        <div style="padding:34px;">
-          <h3 style="margin:0 0 8px; color:#111827;">Summary</h3>
-          <p style="margin:0 0 18px; color:#444;">Your summary will appear here...</p>
-          <h3 style="margin:0 0 8px; color:#111827;">Experience</h3>
-          <p style="margin:0 0 18px; color:#444;">Experience will appear here...</p>
-          <h3 style="margin:0 0 8px; color:#111827;">Education</h3>
-          <p style="margin:0; color:#444;">Education will appear here...</p>
-        </div>
-      </div>
-    `;
-  }
-
-  if (template === "resume-gold-accent") {
-    preview.innerHTML = `
-      <div style="padding:0; background:#fff; min-height:100%; font-family:Arial;">
-        <div style="height:16px; background:#d4af37;"></div>
-        <div style="padding:30px 34px 10px;">
-          <h1 style="margin:0 0 6px; color:#111;">Your Name</h1>
-          <p style="margin:0 0 18px; color:#777;">Email • Phone • Location</p>
-          <h3 style="margin:0 0 8px; color:#b3871e;">Professional Summary</h3>
-          <p style="margin:0 0 18px; color:#444;">Your summary will appear here...</p>
-          <h3 style="margin:0 0 8px; color:#b3871e;">Experience</h3>
-          <p style="margin:0 0 18px; color:#444;">Experience will appear here...</p>
-          <h3 style="margin:0 0 8px; color:#b3871e;">Education</h3>
-          <p style="margin:0; color:#444;">Education will appear here...</p>
-        </div>
-      </div>
-    `;
-  }
-
-  if (template === "resume-ats") {
-    preview.innerHTML = `
-      <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
-        <h1 style="margin:0 0 8px; color:#111;">Your Name</h1>
-        <p style="margin:0 0 18px; color:#555;">Email | Phone | Location</p>
-        <hr style="border:none; border-top:1px solid #ccc; margin:0 0 18px;">
-        <h3 style="margin:0 0 8px; color:#111;">Summary</h3>
-        <p style="margin:0 0 18px; color:#444;">ATS-friendly summary will appear here...</p>
-        <h3 style="margin:0 0 8px; color:#111;">Skills</h3>
-        <p style="margin:0 0 18px; color:#444;">Skills will appear here...</p>
-        <h3 style="margin:0 0 8px; color:#111;">Experience</h3>
-        <p style="margin:0 0 18px; color:#444;">Experience will appear here...</p>
-        <h3 style="margin:0 0 8px; color:#111;">Education</h3>
-        <p style="margin:0; color:#444;">Education will appear here...</p>
-      </div>
-    `;
+    preview.innerHTML = renderTemplatePreview("resume-classic", "");
+    return;
   }
 
   if (template === "essay-standard") {
-    preview.innerHTML = `
-      <div style="padding:40px; font-family:Georgia;">
-        <h2 style="text-align:center;">Essay Title</h2>
-        <p>Your essay content will appear here...</p>
-      </div>
-    `;
+    preview.innerHTML = renderTemplatePreview("essay-standard", "");
+    return;
   }
 
   if (template === "ebook-clean") {
-    preview.innerHTML = `
-      <div style="padding:40px; font-family:Georgia;">
-        <h2>eBook Title</h2>
-        <p>Chapter content will appear here...</p>
-      </div>
-    `;
+    preview.innerHTML = renderTemplatePreview("ebook-clean", "");
+    return;
   }
 
-  if (template === "legal-standard") {
-    preview.innerHTML = `
-      <div style="padding:40px; font-family:Georgia;">
-        <h2 style="text-align:center;">Legal Document</h2>
-        <p>Formal legal-style content will appear here...</p>
-      </div>
-    `;
+  if (
+    template === "legal-3-day-notice" ||
+    template === "legal-lease-agreement" ||
+    template === "legal-demand-letter" ||
+    template === "legal-complaint-letter" ||
+    template === "legal-eviction-notice" ||
+    template === "legal-standard"
+  ) {
+    preview.innerHTML = renderTemplatePreview("legal-standard", "");
+    return;
   }
 
-  if (template === "business-formal") {
-    preview.innerHTML = `
-      <div style="padding:40px;">
-        <h2>Business Document</h2>
-        <p>Business content will appear here...</p>
-      </div>
-    `;
+  if (
+    template === "business-proposal" ||
+    template === "business-letter" ||
+    template === "business-invoice-request" ||
+    template === "business-scope-of-work" ||
+    template === "business-partnership-letter" ||
+    template === "business-formal"
+  ) {
+    preview.innerHTML = renderTemplatePreview("business-formal", "");
+    return;
   }
 
   if (template === "general-professional") {
-    preview.innerHTML = `
-      <div style="padding:40px;">
-        <h2>Professional Document</h2>
-        <p>Your professional content will appear here...</p>
-      </div>
-    `;
+    preview.innerHTML = renderTemplatePreview("general-professional", "");
   }
 }
 
