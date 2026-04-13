@@ -212,8 +212,9 @@ FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
 
 function clearSession() {
   const docType = document.getElementById("docType");
-  const template = document.getElementById("templateSelect");
-  const input = document.getElementById("userInput");
+const templateCategory = document.getElementById("templateCategory");
+const template = document.getElementById("templateSelect");
+const input = document.getElementById("userInput");
  const preview = document.getElementById("outputPreview");
   const fileUpload = document.getElementById("fileUpload");
   const modeLabel = document.getElementById("previewModeLabel");
@@ -225,10 +226,11 @@ function clearSession() {
   totalPages = 1;
 
   if (docType) docType.value = "";
-  if (template) template.value = "";
-  if (input) input.value = "";
-  if (fileUpload) fileUpload.value = "";
-
+if (templateCategory) templateCategory.value = "";
+if (template) template.innerHTML = `<option value="">Select Subtype Detail</option>`;
+if (input) input.value = "";
+if (fileUpload) fileUpload.value = "";
+currentTemplate = "";
   if (preview) {
     preview.innerHTML = `
       <div class="preview-content">Your document preview will appear here...</div>
