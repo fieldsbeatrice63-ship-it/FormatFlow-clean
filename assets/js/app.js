@@ -185,6 +185,7 @@ if (docType === "resume") {
   preview.innerHTML = renderTemplatePreview("resume-plain", finalOutput);
   return;
 }
+    preview.innerHTML = renderTemplatePreview(template, finalOutput);
 setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
 applyZoom();
 
