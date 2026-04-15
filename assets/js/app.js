@@ -570,13 +570,9 @@ currentTemplate = resolvedTemplate;
     `;
   }
 if (template === "resume-classic") {
-  preview.innerHTML = `
-    <div style="padding:40px; font-family:Arial;">
-      <h1>Your Name</h1>
-      <h3>Professional Summary</h3>
-      <p>Your summary will appear here...</p>
-      <h3>Experience</h3>
-      <p>Your experience will appear here...</p>
+  return `
+    <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
+      <div style="line-height:1.8; color:#222;"><p>${formattedContent}</p></div>
     </div>
   `;
 }
