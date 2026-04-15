@@ -155,10 +155,12 @@ const data = await response.json();
 let finalOutput = data.output || "";
 
 if (
+  docType === "resume" ||
   docType === "legal" ||
   docType === "business" ||
   docType === "cover-letter" ||
   docType === "resignation-letter"
+
 ) {
   const rewriteResponse = await fetch("https://format-flow-backend.onrender.com/api/rewrite-document", {
     method: "POST",
