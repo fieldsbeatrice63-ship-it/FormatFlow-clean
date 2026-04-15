@@ -342,6 +342,38 @@ function closeUnlockModal() {
   const modal = document.getElementById("unlockModal");
   if (modal) modal.classList.add("hidden");
 }
+function getSmartPdfBlocksFromPreview(previewEl) {
+  const raw = (previewEl.innerText || previewEl.textContent || "")
+    .replace(/\r/g, "")
+    .replace(/\t/g, " ")
+    .replace(/[ ]{2,}/g, " ")
+    .trim();
+
+  if (!raw) return [];
+
+  const chunks = raw
+    .split(/\n\s*\n+/)
+    .map(block => block.trim())
+    .filter(Boolean);
+
+  return chunks.map(block => {
+    const lines = block.split("\n").map(line => line.trim()).filter(Boolean);
+    const firstLine = lines[0] || "";
+
+    const isHeading =
+      lines.length === 1 &&
+      (
+        firstLine.length <= 60 ||
+        /^[A-Z0-9 &/-]+$/.test(firstLine) ||
+        /summary|skills|experience|education|profile|objective|business document|legal document|ebook title|essay title/i.test(firstLine)
+      );
+
+    return {
+      text: lines.join(" "),
+      type: isHeading ? "heading" : "paragraph"
+    };
+  });
+}
 
 async function exportPDF() {
   const preview = document.getElementById("outputPreview");
@@ -353,35 +385,59 @@ async function exportPDF() {
 
   try {
     const { jsPDF } = window.jspdf;
-
     const pdf = new jsPDF("p", "pt", "letter");
 
-    const margin = 40;
     const pageWidth = 612;
-    const usableWidth = pageWidth - margin * 2;
+    const pageHeight = 792;
 
-    // 🔑 Extract CLEAN TEXT (not image)
-    const text = preview.innerText || preview.textContent || "";
+    const marginLeft = 54;
+    const marginRight = 54;
+    const marginTop = 60;
+    const marginBottom = 60;
 
-    // 🔑 Split into lines that fit page width
-    const lines = pdf.splitTextToSize(text, usableWidth);
+    const usableWidth = pageWidth - marginLeft - marginRight;
+    const maxY = pageHeight - marginBottom;
 
-    let y = 60;
-    const lineHeight = 16;
-    const pageHeight = 792 - 60;
+    const blocks = getSmartPdfBlocksFromPreview(preview);
 
-    lines.forEach((line, index) => {
-      if (y > pageHeight) {
+    pdf.setFont("times", "normal");
+
+    let y = marginTop;
+
+    blocks.forEach((block, index) => {
+      const isHeading = block.type === "heading";
+
+      pdf.setFont("times", isHeading ? "bold" : "normal");
+      pdf.setFontSize(isHeading ? 14 : 11);
+
+      const lineHeight = isHeading ? 20 : 16;
+      const spaceBefore = isHeading ? 14 : 6;
+      const spaceAfter = isHeading ? 8 : 10;
+
+      const lines = pdf.splitTextToSize(block.text, usableWidth);
+      const blockHeight = lines.length * lineHeight;
+
+      if (y + spaceBefore + blockHeight + spaceAfter > maxY) {
         pdf.addPage();
-        y = 60;
+        y = marginTop;
       }
 
-      pdf.text(line, margin, y);
-      y += lineHeight;
+      y += spaceBefore;
+
+      lines.forEach(line => {
+        if (y + lineHeight > maxY) {
+          pdf.addPage();
+          y = marginTop;
+        }
+
+        pdf.text(line, marginLeft, y);
+        y += lineHeight;
+      });
+
+      y += spaceAfter;
     });
 
     pdf.save("formatflow-document.pdf");
-
     setAssistantMessage("PDF exported successfully.");
   } catch (err) {
     console.error(err);
