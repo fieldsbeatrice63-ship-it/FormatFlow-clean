@@ -590,6 +590,9 @@ if (template === "resume-classic") {
 document.addEventListener("DOMContentLoaded", loadSelectedTemplate);
 function renderTemplatePreview(template, content = "") {
   const safeContent = content || "";
+const formattedContent = escapeHtml(safeContent)
+  .replace(/\n{2,}/g, "</p><p>")
+  .replace(/\n/g, "<br>");  
 const resumeData = parseResumeSections(content);
 if (template === "resume-classic") {
   return `
