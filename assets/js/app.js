@@ -699,7 +699,7 @@ if (template === "resume-classic") {
     return `
       <div style="padding:40px; font-family:Georgia;">
         <h2 style="text-align:center;">Essay Title</h2>
-        <div style="line-height:1.8;">${safeContent}</div>
+        <div style="line-height:1.8;"><p>${formattedContent}</p></div>
       </div>
     `;
   }
@@ -708,7 +708,7 @@ if (template === "resume-classic") {
     return `
       <div style="padding:40px; font-family:Georgia;">
         <h2>eBook Title</h2>
-        <div style="line-height:1.8;">${safeContent}</div>
+       <div style="line-height:1.8;"><p>${formattedContent}</p></div>
       </div>
     `;
   }
@@ -717,7 +717,7 @@ if (template === "resume-classic") {
     return `
       <div style="padding:40px; font-family:Georgia;">
         <h2 style="text-align:center;">Legal Document</h2>
-        <div style="line-height:1.8;">${safeContent}</div>
+        <div style="line-height:1.8;"><p>${formattedContent}</p></div>
       </div>
     `;
   }
@@ -726,7 +726,7 @@ if (template === "resume-classic") {
     return `
       <div style="padding:40px;">
         <h2>Business Document</h2>
-        <div style="line-height:1.8;">${safeContent}</div>
+        <div style="line-height:1.8;"><p>${formattedContent}</p></div>
       </div>
     `;
   }
@@ -735,14 +735,14 @@ if (template === "resume-classic") {
     return `
       <div style="padding:40px;">
         <h2>Professional Document</h2>
-        <div style="line-height:1.8;">${safeContent}</div>
+        <div style="line-height:1.8;"><p>${formattedContent}</p></div>
       </div>
     `;
   }
 
   return `
     <div style="padding:40px; background:#fff; min-height:100%;">
-      <div style="line-height:1.8;">${safeContent}</div>
+      <div style="line-height:1.8;"><p>${formattedContent}</p></div>
     </div>
   `;
 }
