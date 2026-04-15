@@ -177,8 +177,9 @@ if (
   finalOutput = rewriteData.output || finalOutput;
 }
 
-preview.innerHTML = renderTemplatePreview(template, finalOutput);
-
+let renderMode = template;
+if (docType === "resume") renderMode = "resume-plain";
+preview.innerHTML = renderTemplatePreview(renderMode, finalOutput);
 setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
 applyZoom();
 
