@@ -5,6 +5,9 @@ let totalPages = 1;
 
 function selectTemplate(template) {
   currentTemplate = template || "";
+  if (template === "resume-classic") {
+  currentTemplate = "resume-plain";
+}
 
   const preview = document.getElementById("outputPreview");
   if (!preview || !template) return;
