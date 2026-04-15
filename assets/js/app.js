@@ -13,7 +13,7 @@ function selectTemplate(template) {
   if (!preview || !template) return;
 
   if (template === "resume-classic") {
-    preview.innerHTML = renderTemplatePreview("resume-classic", "");
+    preview.innerHTML = renderTemplatePreview("resume-plain", "");
     return;
   }
 
