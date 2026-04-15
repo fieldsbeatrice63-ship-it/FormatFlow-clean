@@ -593,6 +593,14 @@ const formattedContent = escapeHtml(safeContent)
   .replace(/\n{2,}/g, "</p><p>")
   .replace(/\n/g, "<br>");  
 const resumeData = parseResumeSections(content);
+
+  if (template === "resume-plain") {
+  return `
+    <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
+      <div style="line-height:1.8; color:#222;"><p>${formattedContent}</p></div>
+    </div>
+  `;
+}
 if (template === "resume-classic") {
   return `
     <div style="padding:40px; font-family:Arial; background:#fff; min-height:100%;">
