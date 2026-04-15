@@ -182,10 +182,7 @@ if (
 
 let renderMode = template;
 if (docType === "resume") {
-  const cleaned = content.trim();
-
-  preview.innerHTML = renderTemplatePreview("resume-plain", cleaned);
-
+  preview.innerHTML = renderTemplatePreview("resume-plain", finalOutput);
   return;
 }
 setAssistantMessage("Your document has been prepared in preview form. Review it below and refine it if needed.");
