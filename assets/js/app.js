@@ -224,14 +224,7 @@ const outputBox = document.getElementById("outputBox");
 
     const data = await response.json();
 
-    preview.innerHTML = `
-      <div class="preview-content">${data.output}</div>
-   <div class="watermark">FORMATFLOW PREVIEW</div>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
-</div>
-    `;
+    preview.innerHTML = renderTemplatePreview(currentTemplate || "general-professional", data.output);
 
     setAssistantMessage("Your document has been refined successfully.");
     applyZoom();
@@ -265,13 +258,9 @@ if (fileUpload) fileUpload.value = "";
 currentTemplate = "";
   if (preview) {
     preview.innerHTML = `
-      <div class="preview-content">Your document preview will appear here...</div>
-<div class="watermark">FORMATFLOW PREVIEW</div>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW<br>
-FORMATFLOW PREVIEW • FORMATFLOW PREVIEW • FORMATFLOW PREVIEW
-</div>
-    `;
+     preview.innerHTML = `
+  <div class="preview-content">Your document preview will appear here...</div>
+`;
     preview.style.transform = "scale(1)";
     preview.style.transformOrigin = "top center";
   }
